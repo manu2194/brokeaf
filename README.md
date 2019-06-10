@@ -6,8 +6,13 @@ BrokeAF is a online expense manager with the intention of employing a purely tex
 
 ## How to use
 
-Simply run _nodemon_ from the root folder and visit [LocalHost:3000](http://localhost:3000/).
+1. Install all the dependancies with `npm install`
+2. Run front-end and back-end together with `npm run dev` or just `npm run server` for back-end and `npm run client` for front-end.
 
-## Implementation
+## Info
 
-The backend is powered by Node.js and Express.js written in JavaScript. The Front-end is developed in React.js.
+###Author
+Manu Venugopal
+
+###Version
+1.0.0
