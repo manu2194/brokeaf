@@ -18,3 +18,7 @@ Manu Venugopal
 ### Version
 
 1.0.0
+
+### Notes
+
+This project uses Brad Traversy's [react_express_starter](https://github.com/bradtraversy/react_express_starter) boilerplate as a starting point. I highly recommend using this if you plan on building web apps that use React as the frontend and Node as the backend.
