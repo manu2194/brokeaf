@@ -13,6 +13,7 @@ import Expense from "./components/Expense";
 import ExpenseTable from "./components/ExpenseTable";
 import "./static/App.css";
 import "./static/scripts";
+import "./static/brandon.png";
 var axios = require("axios");
 
 class App extends Component {
@@ -129,6 +130,7 @@ class App extends Component {
               className="mx-auto"
               size="sm"
               color="warning"
+              type="grow"
             />
             ) : (
             <span />

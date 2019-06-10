@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import brandLogo from "../static/brand.ico";
 import {
   Collapse,
   Navbar,
@@ -23,6 +23,7 @@ class AppNavbar extends Component {
       <div>
         <Navbar className="shadow-lg" color="dark" dark expand="md">
           <NavbarBrand className="text-warning" href="/">
+            <img src={brandLogo} />
             Broke<span className="font-weight-bold">AF</span>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
