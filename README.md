@@ -12,7 +12,9 @@ BrokeAF is a online expense manager with the intention of employing a purely tex
 ## Info
 
 ###Author
+
 Manu Venugopal
 
 ###Version
+
 1.0.0
