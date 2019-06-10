@@ -72,7 +72,7 @@ class App extends Component {
     return (
       <div className="App">
         <AppNavbar />
-        <div className="mt-5 mb-5 mx-auto w-75">
+        <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
           <Expense
             state={this.state}
             submitExpense={this.handleSubmitExpense}
@@ -81,16 +81,15 @@ class App extends Component {
         <Card
           style={{ width: "90%" }}
           color="dark"
-          className="mx-auto text-light rounded border border-warning"
+          className="mx-auto mb-5 text-light rounded border border-warning"
         >
           <CardHeader>
             <Row>
-              <Col sm="3">Expenses</Col>
-              <Col sm="6" />
-              <Col sm="3">
+              <Col xs="3">Expenses</Col>
+              <Col xs="9">
                 <Badge
                   color={this.totalExpenseBadgeColor()}
-                  className="p-2"
+                  className="p-2 float-right"
                   pill
                 >
                   Total Amount:

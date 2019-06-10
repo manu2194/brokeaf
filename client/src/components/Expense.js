@@ -59,7 +59,7 @@ class Expense extends Component {
           />
           <InputGroupAddon addonType="prepend">
             <Button id="add-expense" color="orange" type="submit">
-              Add Expense
+              Add <span className="font-weight-bold">Expense</span>
             </Button>
           </InputGroupAddon>
         </InputGroup>

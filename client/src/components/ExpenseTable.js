@@ -30,13 +30,19 @@ class ExpenseTable extends Component {
   render() {
     const { isEmpty } = this.state.isEmpty;
     return (
-      <ListGroup flush>
+      <ListGroup>
         <ListGroupItem className="bg-warning text-dark rounded font-weight-bold">
           <Row>
-            <Col md="1" />
-            <Col md="5">Items</Col>
-            <Col md="3">Amount</Col>
-            <Col md="3">Date</Col>
+            <Col className="p-0" xs="1" />
+            <Col className="p-0" xs="5">
+              Items
+            </Col>
+            <Col className="p-0" xs="3">
+              Amount
+            </Col>
+            <Col className="p-0" xs="3">
+              Date
+            </Col>
           </Row>
         </ListGroupItem>
         {this.props.state.expenses.map(expense => (
@@ -45,9 +51,9 @@ class ExpenseTable extends Component {
             className={this.generateBootstrapClass() + "pt-2 pb-2"}
           >
             <Row>
-              <Col md="1">
+              <Col xs="1">
                 <Button
-                  className="remove-button rounded-circle"
+                  className="remove-button"
                   type="button"
                   size="sm"
                   onClick={() => this.props.removeExpense(expense._id)}
@@ -55,9 +61,15 @@ class ExpenseTable extends Component {
                   &times;
                 </Button>
               </Col>
-              <Col md="5">{expense.item}</Col>
-              <Col md="3">$ {expense.amount}</Col>
-              <Col md="3">{expense.date}</Col>
+              <Col xs="5" className="p-0">
+                {expense.item}
+              </Col>
+              <Col xs="3" className="p-0">
+                $ {expense.amount}
+              </Col>
+              <Col xs="3" className="p-0">
+                {expense.date}
+              </Col>
             </Row>
           </ListGroupItem>
         ))}
