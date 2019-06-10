@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffc6ff;
+  background-image: linear-gradient(
+    90deg,
+    #2b2b2b 0%,
+    #3a3a3a 55%,
+    #2e2e2e 100%
+  );
+}
+
+.expense-input,
+.expense-input:focus {
+  outline: none;
+  border: none;
+
+  background: none;
+  border: 1px solid orange;
+  color: rgb(255, 204, 110);
+}
+.expense-input:focus {
+  box-shadow: 0 0 10px 1px rgba(255, 166, 0, 0.39);
+}
+
+.btn-orange {
+  outline: none;
+  color: orange;
+  border: none;
+  border: 1px solid orange;
+  border-radius: 0 10px 10px 0 !important;
+  background-color: rgba(255, 166, 0, 0);
+}
+.btn-orange:hover {
+  background-color: orange;
+}
+.btn-orange:focus {
+  box-shadow: 0 0 10px 1px rgba(255, 166, 0, 0.39);
+}
+
+.remove-button {
+  color: red;
+  padding-right: 17%;
+  padding-left: 17%;
+  background-color: rgba(255, 0, 0, 0);
+  border: 1px solid red;
+}
+
+.remove-button:hover,
+.remove-button:focus,
+.remove-button:active {
+  background-color: red;
+  color: rgb(36, 36, 36);
+  border: 1px solid red;
+}
+
+.remove-button:focus,
+.remove-button:active {
+  box-shadow: 0 0 0 1px red;
+}
