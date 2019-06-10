@@ -5,8 +5,11 @@ import {
   InputGroupAddon,
   Button,
   Form,
+  FormGroup,
   UncontrolledPopover,
   UncontrolledTooltip,
+  Row,
+  Col,
   PopoverHeader,
   PopoverBody
 } from "reactstrap";
@@ -62,47 +65,56 @@ class Expense extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <InputGroup>
-          <Input
-            id="expense-field"
-            placeholder="Enter Expense"
-            className="expense-input text-light"
-            onChange={this.handleInputChange}
-            required={true}
-            onKeyUp={realTimeEditing}
-          />
-          <InputGroupAddon addonType="prepend">
-            <Button
-              id="add-expense"
-              className="button-glow"
-              color="outline-warning"
-              type="submit"
-            >
-              Add <span className="font-weight-bold">Expense</span>
-            </Button>
-          </InputGroupAddon>
-          <InputGroupAddon addonType="prepend">
-            <Button
-              id="info"
-              color="outline-primary"
-              className="ml-3 rounded-circle"
-              type="button"
-            >
-              ?
-            </Button>
-            <UncontrolledPopover placement="bottom" target="info">
-              <PopoverHeader>Add Expense</PopoverHeader>
-              <PopoverBody>
-                Adding expenses is easy. Enter the expense in the following
-                format:{" "}
-                <span>
-                  <i>Amount in/for Item</i>
-                </span>
-                . If there are multiple expenses, seperate them by commas.
-              </PopoverBody>
-            </UncontrolledPopover>
-          </InputGroupAddon>
-        </InputGroup>
+        <Row>
+          <Col sm={11}>
+            <FormGroup>
+              <InputGroup>
+                <Input
+                  id="expense-field"
+                  placeholder="Enter Expense"
+                  className="expense-input text-light"
+                  onChange={this.handleInputChange}
+                  required={true}
+                  onKeyUp={realTimeEditing}
+                />
+                <InputGroupAddon addonType="append">
+                  <Button
+                    id="add-expense"
+                    style={{ borderLeft: "none" }}
+                    className="button-glow"
+                    color="outline-warning"
+                    type="submit"
+                  >
+                    Add <span className="font-weight-bold">Expense</span>
+                  </Button>
+                </InputGroupAddon>
+              </InputGroup>
+            </FormGroup>
+          </Col>
+          <Col sm={1}>
+            <FormGroup>
+              <Button
+                id="info"
+                color="outline-primary"
+                className="rounded-circle"
+                type="button"
+              >
+                ?
+              </Button>
+              <UncontrolledPopover placement="bottom" target="info">
+                <PopoverHeader>Add Expense</PopoverHeader>
+                <PopoverBody>
+                  Adding expenses is easy. Enter the expense in the following
+                  format:{" "}
+                  <span>
+                    <i>Amount in/for Item</i>
+                  </span>
+                  . If there are multiple expenses, seperate them by commas.
+                </PopoverBody>
+              </UncontrolledPopover>
+            </FormGroup>
+          </Col>
+        </Row>
       </Form>
     );
   }

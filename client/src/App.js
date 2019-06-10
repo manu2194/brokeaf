@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardHeader, Row, Col, Badge } from "reactstrap";
+import {
+  Spinner,
+  Card,
+  CardBody,
+  CardHeader,
+  Row,
+  Col,
+  Badge
+} from "reactstrap";
 import AppNavbar from "./components/AppNavbar";
 import Expense from "./components/Expense";
 import ExpenseTable from "./components/ExpenseTable";
@@ -9,11 +17,13 @@ var axios = require("axios");
 
 class App extends Component {
   state = {
-    expenses: []
+    expenses: [],
+    loading: false
   };
 
   componentDidMount() {
     //Called to as soon as Component is rendered
+    this.setState({ loading: true });
     axios.get("/api/expenses").then(res => {
       const expenses = res.data;
       //Converting MongoDB date format to pretty JavaScript date format
@@ -26,6 +36,7 @@ class App extends Component {
           //date: new Date(expense.date).toLocaleString().split(",")[0]
         };
       });
+      this.setState({ loading: false });
       this.setState({ expenses });
     });
   }
@@ -57,18 +68,30 @@ class App extends Component {
       return "warning";
     }
   };
+  axiosPost = (expenseObject, callback) => {
+    expenseObject.forEach(expense => {
+      this.setState({ loading: true });
+      axios.post("/api/expense", expense).then(res => {
+        console.log(res);
+      });
+    });
+    callback();
+  };
 
   handleSubmitExpense = expenseObject => {
     //POST to Backend Epi, each expense Object
     expenseObject.forEach(expense => {
+      this.setState({ loading: true });
       //console.log(expense);
-      axios.post("/api/expenses", expense).then(res => {
-        //console.log(res);
-        //console.log(res.data);
-      });
+      axios
+        .post("/api/expenses", expense)
+        .then(res => {
+          //console.log(res);
+          //console.log(res.data);
+          //this.componentDidMount();
+        })
+        .finally(this.componentDidMount());
     });
-    //Re Render Component
-    this.componentDidMount();
   };
 
   removeExpenseHandler = removeId => {
@@ -86,48 +109,69 @@ class App extends Component {
     return (
       <div className="App">
         <AppNavbar />
-        <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
-          <Expense
-            state={this.state}
-            submitExpense={this.handleSubmitExpense}
-          />
-        </div>
-        <Card
-          style={{ width: "90%" }}
-          color="dark"
-          className="mx-auto mb-5 text-light rounded border border-warning"
-        >
-          <CardHeader>
-            <Row>
-              <Col xs="3">Expenses</Col>
-              <Col xs="9">
-                <Badge
-                  color={this.totalExpenseBadgeColor()}
-                  className="p-2 float-right"
-                  pill
-                >
-                  This Month's Expenses:
-                  <span className="ml-2">
-                    $ {this.calculateThisMonthExpenses()}
-                  </span>
-                </Badge>
-              </Col>
-            </Row>
-          </CardHeader>
-          <CardBody className="pl-0 pr-0">
-            {this.state.expenses.length > 0 ? (
-              <ExpenseTable
-                color="dark"
+        <div class="container-fluid">
+          <Row>
+            <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
+              <Expense
                 state={this.state}
-                removeExpense={this.removeExpenseHandler}
+                submitExpense={this.handleSubmitExpense}
               />
+            </div>
+          </Row>
+          <Row>
+            {/* {this.state.loading ? (
+            <Spinner className="mx-auto" size="sm" color="warning" />
+          ) : (
+            <span />
+          )} */}
+            <Spinner
+              style={{ visibility: this.state.loading ? "visible" : "hidden" }}
+              className="mx-auto"
+              size="sm"
+              color="warning"
+            />
             ) : (
-              <div className="row">
-                <span className="mx-auto"> You have no expenses</span>
-              </div>
-            )}
-          </CardBody>
-        </Card>
+            <span />
+          </Row>
+          <Row>
+            <Card
+              style={{ width: "90%" }}
+              color="dark"
+              className="mx-auto mb-5 text-light rounded border border-warning"
+            >
+              <CardHeader>
+                <Row>
+                  <Col xs="3">Expenses</Col>
+                  <Col xs="9">
+                    <Badge
+                      color={this.totalExpenseBadgeColor()}
+                      className="p-2 float-right"
+                      pill
+                    >
+                      This Month's Expenses:
+                      <span className="ml-2">
+                        $ {this.calculateThisMonthExpenses()}
+                      </span>
+                    </Badge>
+                  </Col>
+                </Row>
+              </CardHeader>
+              <CardBody className="pl-0 pr-0">
+                {this.state.expenses.length > 0 ? (
+                  <ExpenseTable
+                    color="dark"
+                    state={this.state}
+                    removeExpense={this.removeExpenseHandler}
+                  />
+                ) : (
+                  <div className="row">
+                    <span className="mx-auto"> You have no expenses</span>
+                  </div>
+                )}
+              </CardBody>
+            </Card>
+          </Row>
+        </div>
       </div>
     );
   }
