@@ -1,5 +1,17 @@
 import React, { Component } from "react";
-import { Input, InputGroup, InputGroupAddon, Button, Form } from "reactstrap";
+import {
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  Button,
+  Form,
+  UncontrolledPopover,
+  UncontrolledTooltip,
+  PopoverHeader,
+  PopoverBody
+} from "reactstrap";
+import "../static/scripts";
+import { realTimeEditing } from "../static/scripts";
 const uuid = require("uuid");
 
 class Expense extends Component {
@@ -53,14 +65,42 @@ class Expense extends Component {
         <InputGroup>
           <Input
             id="expense-field"
-            className="expense-input"
+            placeholder="Enter Expense"
+            className="expense-input text-light"
             onChange={this.handleInputChange}
             required={true}
+            onKeyUp={realTimeEditing}
           />
           <InputGroupAddon addonType="prepend">
-            <Button id="add-expense" color="orange" type="submit">
+            <Button
+              id="add-expense"
+              className="button-glow"
+              color="outline-warning"
+              type="submit"
+            >
               Add <span className="font-weight-bold">Expense</span>
             </Button>
+          </InputGroupAddon>
+          <InputGroupAddon addonType="prepend">
+            <Button
+              id="info"
+              color="outline-primary"
+              className="ml-3 rounded-circle"
+              type="button"
+            >
+              ?
+            </Button>
+            <UncontrolledPopover placement="bottom" target="info">
+              <PopoverHeader>Add Expense</PopoverHeader>
+              <PopoverBody>
+                Adding expenses is easy. Enter the expense in the following
+                format:{" "}
+                <span>
+                  <i>Amount in/for Item</i>
+                </span>
+                . If there are multiple expenses, seperate them by commas.
+              </PopoverBody>
+            </UncontrolledPopover>
           </InputGroupAddon>
         </InputGroup>
       </Form>

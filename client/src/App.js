@@ -3,7 +3,8 @@ import { Card, CardBody, CardHeader, Row, Col, Badge } from "reactstrap";
 import AppNavbar from "./components/AppNavbar";
 import Expense from "./components/Expense";
 import ExpenseTable from "./components/ExpenseTable";
-import "./App.css";
+import "./static/App.css";
+import "./static/scripts";
 var axios = require("axios");
 
 class App extends Component {
@@ -21,7 +22,8 @@ class App extends Component {
           _id: expense._id,
           item: expense.item,
           amount: expense.amount,
-          date: new Date(expense.date).toLocaleString().split(",")[0]
+          date: expense.date
+          //date: new Date(expense.date).toLocaleString().split(",")[0]
         };
       });
       this.setState({ expenses });
@@ -32,6 +34,18 @@ class App extends Component {
     var sum = 0;
     this.state.expenses.map(expense => {
       sum += parseFloat(expense.amount);
+    });
+    return sum;
+  };
+
+  calculateThisMonthExpenses = () => {
+    var currentMonth = new Date(Date.now()).getMonth();
+    var thisMonthExpenes = this.state.expenses.filter(
+      expense => new Date(expense.date).getMonth() == currentMonth
+    );
+    var sum = 0;
+    thisMonthExpenes.map(element => {
+      sum = sum + parseFloat(element.amount);
     });
     return sum;
   };
@@ -92,8 +106,10 @@ class App extends Component {
                   className="p-2 float-right"
                   pill
                 >
-                  Total Amount:
-                  <span className="ml-2">$ {this.calculateTotalExpense()}</span>
+                  This Month's Expenses:
+                  <span className="ml-2">
+                    $ {this.calculateThisMonthExpenses()}
+                  </span>
                 </Badge>
               </Col>
             </Row>

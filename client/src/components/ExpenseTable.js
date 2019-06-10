@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { ListGroup, ListGroupItem, Row, Col, Button } from "reactstrap";
+import {
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Col,
+  Button,
+  UncontrolledTooltip
+} from "reactstrap";
 
 class ExpenseTable extends Component {
   state = {
@@ -17,9 +24,9 @@ class ExpenseTable extends Component {
   generateBootstrapClass = () => {
     const backgroundColor = this.bootstrapColorClass();
     var textColor;
-    if (backgroundColor == "light") {
+    if (backgroundColor === "light") {
       textColor = "dark";
-    } else if (backgroundColor == "dark") {
+    } else if (backgroundColor === "dark") {
       textColor = "light";
     } else {
       textColor = "light";
@@ -53,13 +60,22 @@ class ExpenseTable extends Component {
             <Row>
               <Col xs="1">
                 <Button
-                  className="remove-button"
+                  id={`delete-expense-${expense._id}`}
+                  className="rounded-circle"
+                  color="outline-danger"
                   type="button"
                   size="sm"
                   onClick={() => this.props.removeExpense(expense._id)}
                 >
                   &times;
                 </Button>
+                <UncontrolledTooltip
+                  size="sm"
+                  placement="bottom"
+                  target={`delete-expense-${expense._id}`}
+                >
+                  Delete {expense.item}
+                </UncontrolledTooltip>
               </Col>
               <Col xs="5" className="p-0">
                 {expense.item}
@@ -68,7 +84,7 @@ class ExpenseTable extends Component {
                 $ {expense.amount}
               </Col>
               <Col xs="3" className="p-0">
-                {expense.date}
+                {new Date(expense.date).toLocaleString().split(",")[0]}
               </Col>
             </Row>
           </ListGroupItem>
