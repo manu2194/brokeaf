@@ -6,7 +6,7 @@ BrokeAF is a online expense manager with the intention of employing a purely tex
 
 ## How to use
 
-1. Install all the dependancies with `npm install`
+1. Install all the dependancies with `npm install` and `npm run client-install`.
 2. Run front-end and back-end together with `npm run dev` or just `npm run server` for back-end and `npm run client` for front-end.
 
 ## Info
