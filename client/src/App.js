@@ -14,6 +14,7 @@ import ExpenseTable from "./components/ExpenseTable";
 import "./static/App.css";
 import "./static/scripts";
 import "./static/brandon.png";
+import { snackBar } from "./static/scripts";
 var axios = require("axios");
 
 class App extends Component {
@@ -91,7 +92,10 @@ class App extends Component {
           //console.log(res.data);
           //this.componentDidMount();
         })
-        .finally(this.componentDidMount());
+        .finally(() => {
+          this.componentDidMount();
+          snackBar();
+        });
     });
   };
 
@@ -110,7 +114,7 @@ class App extends Component {
     return (
       <div className="App">
         <AppNavbar />
-        <div class="container-fluid">
+        <div className="container-fluid">
           <Row>
             <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
               <Expense
@@ -130,7 +134,6 @@ class App extends Component {
               className="mx-auto"
               size="sm"
               color="warning"
-              type="grow"
             />
             ) : (
             <span />
@@ -173,6 +176,9 @@ class App extends Component {
               </CardBody>
             </Card>
           </Row>
+          <div className="pt-1 pb-1 pr-2 pl-2" id="snackbar">
+            Added Expense
+          </div>
         </div>
       </div>
     );
