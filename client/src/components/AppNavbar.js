@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import brandLogo from "../static/brand.ico";
+import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -9,6 +10,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import App from "../App";
 
 class AppNavbar extends Component {
   state = { isOpen: false };
@@ -22,10 +24,13 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar className="shadow-lg" color="dark" dark expand="md">
-          <NavbarBrand className="text-warning" href="/">
-            <img src={brandLogo} />
-            Broke<span className="font-weight-bold">AF</span>
-          </NavbarBrand>
+          <Router>
+            <Link to="/" className="navbar-brand text-warning">
+              <img src={brandLogo} />
+              Broke<span className="font-weight-bold">AF</span>
+            </Link>
+            <Route path="/" exact />
+          </Router>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-0" navbar>

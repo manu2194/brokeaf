@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 import {
   Spinner,
   Card,
@@ -15,6 +16,7 @@ import "./static/App.css";
 import "./static/scripts";
 import "./static/brandon.png";
 import { snackBar } from "./static/scripts";
+
 var axios = require("axios");
 
 class App extends Component {
@@ -69,15 +71,6 @@ class App extends Component {
     } else {
       return "warning";
     }
-  };
-  axiosPost = (expenseObject, callback) => {
-    expenseObject.forEach(expense => {
-      this.setState({ loading: true });
-      axios.post("/api/expense", expense).then(res => {
-        console.log(res);
-      });
-    });
-    callback();
   };
 
   handleSubmitExpense = expenseObject => {

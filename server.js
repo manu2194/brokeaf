@@ -1,11 +1,12 @@
 var express = require("express");
 var mongoose = require("mongoose");
 const expenseItems = require("./routes/api/expenseItems");
+const path = require("path");
+const login = require("./routes/api/login");
 const app = express();
 
 //Bodyparser middleware
 app.use(express.json());
-
 //DB Config
 const db = require("./config/keys").mongoURI;
 
@@ -15,17 +16,17 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
-// app.get("/api/customers", (req, res) => {
-//   const customers = [
-//     { id: 1, firstName: "John", lastName: "Doe" },
-//     { id: 2, firstName: "Brad", lastName: "Traversy" },
-//     { id: 3, firstName: "Mary", lastName: "Swanson" }
-//   ];
-
-//   res.json(customers);
-// });
-
+// Use Routes
 app.use("/api/expenses", expenseItems);
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === "production") {
+  //Set Static Folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = 5000;
 

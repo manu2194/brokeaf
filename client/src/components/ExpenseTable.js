@@ -5,91 +5,80 @@ import {
   Row,
   Col,
   Button,
-  UncontrolledTooltip
+  UncontrolledTooltip,
+  Table
 } from "reactstrap";
+/**
+ * Function Component for Tooltip. Add it to the parent class of the component for which you need a tooltip.
+ * @param {*Object} Object of the class that calls this function
+ */
+function removeExpenseToolTip(expense) {
+  return (
+    <UncontrolledTooltip
+      size="sm"
+      placement="bottom"
+      target={`delete-expense-${expense._id}`}
+    >
+      Delete {expense.item}
+    </UncontrolledTooltip>
+  );
+}
 
+/**
+ * Remove button component.
+ * @param {*Object} Object should have key id.
+ * @param {*Object} Object of the class that calls this function
+ */
+function removeButton(expense, object) {
+  return (
+    <Button
+      id={`delete-expense-${expense._id}`}
+      className="rounded-circle"
+      color="outline-danger"
+      type="button"
+      size="sm"
+      onClick={() => object.props.removeExpense(expense._id)}
+    >
+      &times;
+    </Button>
+  );
+}
+
+/**
+ * Expense Table Component. Displays expenses in a <table> format.
+ */
 class ExpenseTable extends Component {
   state = {
     isEmpty: this.props.state.expenses.length === 0
   };
 
-  bootstrapColorClass = () => {
-    if (this.props.color) {
-      return this.props.color;
-    } else {
-      return "light";
-    }
-  };
-
-  generateBootstrapClass = () => {
-    const backgroundColor = this.bootstrapColorClass();
-    var textColor;
-    if (backgroundColor === "light") {
-      textColor = "dark";
-    } else if (backgroundColor === "dark") {
-      textColor = "light";
-    } else {
-      textColor = "light";
-    }
-
-    return `bg-${backgroundColor} text-${textColor}`;
-  };
+  dateFormat = date => new Date(date).toLocaleString();
   render() {
-    const { isEmpty } = this.state.isEmpty;
+    const { expenses } = this.props.state;
     return (
-      <ListGroup>
-        <ListGroupItem className="bg-warning text-dark rounded font-weight-bold">
-          <Row>
-            <Col className="p-0" xs="1" />
-            <Col className="p-0" xs="5">
-              Items
-            </Col>
-            <Col className="p-0" xs="3">
-              Amount
-            </Col>
-            <Col className="p-0" xs="3">
-              Date
-            </Col>
-          </Row>
-        </ListGroupItem>
-        {this.props.state.expenses.map(expense => (
-          <ListGroupItem
-            key={expense._id}
-            className={this.generateBootstrapClass() + "pt-2 pb-2"}
-          >
-            <Row>
-              <Col xs="1">
-                <Button
-                  id={`delete-expense-${expense._id}`}
-                  className="rounded-circle"
-                  color="outline-danger"
-                  type="button"
-                  size="sm"
-                  onClick={() => this.props.removeExpense(expense._id)}
-                >
-                  &times;
-                </Button>
-                <UncontrolledTooltip
-                  size="sm"
-                  placement="bottom"
-                  target={`delete-expense-${expense._id}`}
-                >
-                  Delete {expense.item}
-                </UncontrolledTooltip>
-              </Col>
-              <Col xs="5" className="p-0">
-                {expense.item}
-              </Col>
-              <Col xs="3" className="p-0">
-                $ {expense.amount}
-              </Col>
-              <Col xs="3" className="p-0">
-                {new Date(expense.date).toLocaleString().split(",")[0]}
-              </Col>
-            </Row>
-          </ListGroupItem>
-        ))}
-      </ListGroup>
+      <Table dark responsive>
+        <thead className="border-0 shadow-lg bg-warning text-dark">
+          <tr>
+            <th style={{ width: "10%" }}> </th>
+            <th style={{ width: "30%" }}>Expense</th>
+            <th style={{ width: "30%" }}>Amount</th>
+            <th style={{ width: "30%" }}>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {expenses.map(expense => (
+            <tr key={expense.id}>
+              <th scope="row">
+                {removeButton(expense, this)}
+                {removeExpenseToolTip(expense)}
+              </th>
+              <td>{expense.item}</td>
+              <td>{expense.amount}</td>
+              <td>{this.dateFormat(expense.date)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     );
   }
 }
