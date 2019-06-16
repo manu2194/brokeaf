@@ -14,8 +14,33 @@ import {
   PopoverBody
 } from "reactstrap";
 import "../static/scripts";
-import { realTimeEditing } from "../static/scripts";
+import { realTimeEditing, stringifyList } from "../static/scripts";
 const uuid = require("uuid");
+
+function addingExpenseTooltip() {
+  return (
+    <FormGroup>
+      <Button
+        id="info"
+        color="outline-primary"
+        className="rounded-circle"
+        type="button"
+      >
+        ?
+      </Button>
+      <UncontrolledPopover placement="bottom" target="info">
+        <PopoverHeader>Add Expense</PopoverHeader>
+        <PopoverBody>
+          Adding expenses is easy. Enter the expense in the following format:{" "}
+          <span>
+            <i>Amount in/for Item</i>
+          </span>
+          . If there are multiple expenses, seperate them by commas.
+        </PopoverBody>
+      </UncontrolledPopover>
+    </FormGroup>
+  );
+}
 
 class Expense extends Component {
   state = {
@@ -23,17 +48,31 @@ class Expense extends Component {
     length: this.props.state.expenses.length
   };
 
+  getValidInvalidExpenses = allExpenses => {
+    var re = /(\d+ \w+ \w+)+/;
+    var validExpenses = [];
+    var invalidExpenses = [];
+    allExpenses.forEach(expense => {
+      if (re.test(expense)) {
+        validExpenses.push(expense.trim());
+      } else {
+        invalidExpenses.push(expense.trim());
+      }
+    });
+    console.log(invalidExpenses);
+    return { valid: validExpenses, invalid: invalidExpenses };
+  };
   getAllExpenses = value => {
     //Regular Expression. We are only looking for expressions that match <Some amount> <some word like in,for> <Some item>
     var re = /(\d+ \w+ \w+)+/;
     var allExpenses = value.split(",");
-    allExpenses = allExpenses.filter(expense => re.test(expense));
-
-    allExpenses.map((expense, index) => {
-      allExpenses[index] = expense.trim();
-    });
+    var { valid, invalid } = this.getValidInvalidExpenses(allExpenses);
+    if (invalid.length > 0) {
+      var invalidExpenses = invalid.toString();
+      document.querySelector("#expense-field").value = invalidExpenses;
+    }
     //console.log(allExpenses);
-    return allExpenses;
+    return valid;
   };
 
   handleInputChange = event => {
@@ -66,7 +105,7 @@ class Expense extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row>
-          <Col sm={11}>
+          <Col sm={12}>
             <FormGroup>
               <InputGroup>
                 <Input
@@ -85,35 +124,13 @@ class Expense extends Component {
                     color="outline-warning"
                     type="submit"
                   >
-                    Add <span className="font-weight-bold">Expense</span>
+                    <span className="font-weight-bold">Add Expense</span>
                   </Button>
                 </InputGroupAddon>
               </InputGroup>
             </FormGroup>
           </Col>
-          <Col sm={1}>
-            <FormGroup>
-              <Button
-                id="info"
-                color="outline-primary"
-                className="rounded-circle"
-                type="button"
-              >
-                ?
-              </Button>
-              <UncontrolledPopover placement="bottom" target="info">
-                <PopoverHeader>Add Expense</PopoverHeader>
-                <PopoverBody>
-                  Adding expenses is easy. Enter the expense in the following
-                  format:{" "}
-                  <span>
-                    <i>Amount in/for Item</i>
-                  </span>
-                  . If there are multiple expenses, seperate them by commas.
-                </PopoverBody>
-              </UncontrolledPopover>
-            </FormGroup>
-          </Col>
+          {/* <Col sm={1}>{addingExpenseTooltip()}</Col> */}
         </Row>
       </Form>
     );

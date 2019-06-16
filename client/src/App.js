@@ -19,6 +19,20 @@ import { snackBar } from "./static/scripts";
 
 var axios = require("axios");
 
+/**
+ * Spinner icon component that is set to be visible if the parameter loadingFlag is set to be true.
+ * @param {boolean} loadingFlag
+ */
+function SpinnerIcon(loadingFlag) {
+  return (
+    <Spinner
+      style={{ visibility: loadingFlag ? "visible" : "hidden", zIndex: 1 }}
+      className="mx-auto mt-3"
+      id="spinner-icon"
+      color="warning"
+    />
+  );
+}
 class App extends Component {
   state = {
     expenses: [],
@@ -45,17 +59,9 @@ class App extends Component {
     });
   }
 
-  calculateTotalExpense = () => {
-    var sum = 0;
-    this.state.expenses.map(expense => {
-      sum += parseFloat(expense.amount);
-    });
-    return sum;
-  };
-
-  calculateThisMonthExpenses = () => {
+  calculateThisMonthExpenses = expenseArray => {
     var currentMonth = new Date(Date.now()).getMonth();
-    var thisMonthExpenes = this.state.expenses.filter(
+    var thisMonthExpenes = expenseArray.filter(
       expense => new Date(expense.date).getMonth() == currentMonth
     );
     var sum = 0;
@@ -65,8 +71,8 @@ class App extends Component {
     return sum;
   };
 
-  totalExpenseBadgeColor = () => {
-    if (this.state.expenses.length === 0) {
+  totalExpenseBadgeColor = expenseArray => {
+    if (expenseArray.length === 0) {
       return "danger";
     } else {
       return "warning";
@@ -81,17 +87,17 @@ class App extends Component {
       axios
         .post("/api/expenses", expense)
         .then(res => {
-          //console.log(res);
-          //console.log(res.data);
-          //this.componentDidMount();
+          snackBar();
         })
         .finally(() => {
           this.componentDidMount();
-          snackBar();
         });
     });
   };
-
+  /**
+   * Handler that sends a HTTP DELETE request to the server to remove the expense with the given ID from the database
+   * @param {string} removeId
+   */
   removeExpenseHandler = removeId => {
     this.setState(state => ({
       expenses: state.expenses.filter(expense => expense._id !== removeId)
@@ -116,21 +122,7 @@ class App extends Component {
               />
             </div>
           </Row>
-          <Row>
-            {/* {this.state.loading ? (
-            <Spinner className="mx-auto" size="sm" color="warning" />
-          ) : (
-            <span />
-          )} */}
-            <Spinner
-              style={{ visibility: this.state.loading ? "visible" : "hidden" }}
-              className="mx-auto"
-              size="sm"
-              color="warning"
-            />
-            ) : (
-            <span />
-          </Row>
+
           <Row>
             <Card
               style={{ width: "90%" }}
@@ -142,18 +134,22 @@ class App extends Component {
                   <Col xs="3">Expenses</Col>
                   <Col xs="9">
                     <Badge
-                      color={this.totalExpenseBadgeColor()}
+                      color={this.totalExpenseBadgeColor(this.state.expenses)}
                       className="p-2 float-right"
                       pill
                     >
                       This Month's Expenses:
                       <span className="ml-2">
-                        $ {this.calculateThisMonthExpenses()}
+                        ${" "}
+                        {this.calculateThisMonthExpenses(
+                          this.state.expenses
+                        ).toFixed(2)}
                       </span>
                     </Badge>
                   </Col>
                 </Row>
               </CardHeader>
+              {SpinnerIcon(this.state.loading)}
               <CardBody className="pl-0 pr-0">
                 {this.state.expenses.length > 0 ? (
                   <ExpenseTable
@@ -169,7 +165,7 @@ class App extends Component {
               </CardBody>
             </Card>
           </Row>
-          <div className="pt-1 pb-1 pr-2 pl-2" id="snackbar">
+          <div className="pt-2 pb-2 pr-2 pl-2" id="snackbar">
             Added Expense
           </div>
         </div>

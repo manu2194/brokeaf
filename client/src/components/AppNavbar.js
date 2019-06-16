@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import brandLogo from "../static/brand.ico";
+import favicon from "../static/favicon.ico";
 import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Collapse,
@@ -24,13 +24,11 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar className="shadow-lg" color="dark" dark expand="md">
-          <Router>
-            <Link to="/" className="navbar-brand text-warning">
-              <img src={brandLogo} />
-              Broke<span className="font-weight-bold">AF</span>
-            </Link>
-            <Route path="/" exact />
-          </Router>
+          <NavbarBrand href="/" className="navbar-brand text-warning">
+            <img src={favicon} />
+            Broke<span className="font-weight-bold">AF</span>
+          </NavbarBrand>
+
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-0" navbar>

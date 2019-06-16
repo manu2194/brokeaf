@@ -1,9 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Abel&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Dosis&display=swap");
 body {
-  font-family: "Abel", sans-serif;
-  background-color: #ffc6ff;
+  font-family: "Dosis", sans-serif;
+  background-color: #2b2b2b;
   background-image: linear-gradient(
     90deg,
     #2b2b2b 0%,
@@ -39,13 +37,12 @@ body {
 .button-glow:focus:active {
   box-shadow: 0 0 10px 1px rgba(255, 166, 0, 0.39) !important;
 }
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(0, 0, 0);
-  color: white;
+#spinner-icon {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -54,8 +51,8 @@ body {
   min-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
   color: black; /* White text color */
-  background-color: rgb(45, 231, 92);
-  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.39);
+  background-color: rgba(45, 231, 92, 0.932);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.13);
   text-align: center; /* Centered text */
   border-radius: 16px;
   position: fixed; /* Sit on top of the screen */

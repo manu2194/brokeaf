@@ -1,3 +1,7 @@
+/**
+ * Perform real-time CSS style editing of the input text. Changes invalid inputs into red color, and valid inputs as white
+ * @param {*} event
+ */
 export var realTimeEditing = event => {
   var target = event.target;
   var id = target.id;
@@ -14,6 +18,11 @@ export var realTimeEditing = event => {
   }
 };
 
+/**
+ *Check if each of the elements of the array formed by splitting the given value by a comma matches with the given regular expression
+ * @param {Object} regExp
+ * @param {string} value
+ */
 var regExpMatch = (regExp, value) => {
   var valueArray = value.split(",");
 
@@ -28,6 +37,9 @@ var regExpMatch = (regExp, value) => {
   return tof;
 };
 
+/**
+ * Snackbar timeout function
+ */
 export function snackBar() {
   // Get the snackbar DIV
   var x = document.getElementById("snackbar");

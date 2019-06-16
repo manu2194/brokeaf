@@ -33,6 +33,7 @@ function removeButton(expense, object) {
   return (
     <Button
       id={`delete-expense-${expense._id}`}
+      style={{ fontFamily: "Arial" }}
       className="rounded-circle"
       color="outline-danger"
       type="button"
@@ -56,7 +57,7 @@ class ExpenseTable extends Component {
   render() {
     const { expenses } = this.props.state;
     return (
-      <Table dark responsive>
+      <Table dark responsive hover>
         <thead className="border-0 shadow-lg bg-warning text-dark">
           <tr>
             <th style={{ width: "10%" }}> </th>
@@ -73,7 +74,7 @@ class ExpenseTable extends Component {
                 {removeExpenseToolTip(expense)}
               </th>
               <td>{expense.item}</td>
-              <td>{expense.amount}</td>
+              <td>$ {expense.amount}</td>
               <td>{this.dateFormat(expense.date)}</td>
             </tr>
           ))}
