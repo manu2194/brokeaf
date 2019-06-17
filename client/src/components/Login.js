@@ -9,8 +9,11 @@ import {
   Form,
   FormGroup,
   Label,
-  Alert
+  Alert,
+  Row,
+  Col
 } from "reactstrap";
+import logo from "../static/brandon.png";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
 
 export default class Login extends Component {
@@ -55,58 +58,60 @@ export default class Login extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-3" />
-          <div className="col-sm-6">
-            <Card color="dark" className="text-warning shadow-lg">
-              <CardHeader>
-                <h3>Login</h3>
-              </CardHeader>
-
-              <CardBody className="p-5">
-                <Alert
-                  id="login-failed-alert"
-                  color="danger"
-                  style={{ display: "none" }}
-                >
-                  Email or password does not exist
-                </Alert>
-                <Form onSubmit={this.handleSubmit}>
-                  <FormGroup>
-                    <Label for="email">Enter your email</Label>
-                    <Input
-                      className="text-light expense-input mb-2"
-                      id="email"
-                      onChange={this.handleInputChange}
-                      required={true}
-                      type="email"
-                    />
-                    <Label for="password">Enter your password</Label>
-                    <Input
-                      className="text-light expense-input"
-                      id="password"
-                      type="password"
-                      onChange={this.handleInputChange}
-                      required={true}
-                    />
-                  </FormGroup>
-                  <Button className="btn-block" color="warning" type="submit">
-                    Login
-                  </Button>
-                </Form>
-                <div className="mt-4">
-                  <Link to="/signup">
-                    <span>
-                      Don't have an account yet?
-                      <span className="font-weight-bold">Signup here.</span>
-                    </span>
-                  </Link>
-                </div>
-              </CardBody>
-            </Card>
-          </div>
-          <div className="col-sm-3" />
-        </div>
+        <Row>
+          <Col sm={4} />
+          <Col sm={4}>
+            <div className="login-box mt-5 text-warning">
+              <div className="login-logo row mb-5">
+                <h1 id="logo" className="text-warning mx-auto">
+                  <img src={logo} />
+                  Broke<span className="font-weight-bold">AF</span>
+                </h1>
+              </div>
+              <Alert
+                id="login-failed-alert"
+                className="p-1 small"
+                color="danger"
+                style={{ display: "none" }}
+              >
+                Incorrect email or password
+              </Alert>
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup className="mx-auto">
+                  {/* <Label for="email">Enter your email</Label> */}
+                  <Input
+                    className="login-input mb-2"
+                    id="email"
+                    onChange={this.handleInputChange}
+                    required={true}
+                    type="email"
+                    placeholder={"Email"}
+                  />
+                  {/* <Label for="password">Enter your password</Label> */}
+                  <Input
+                    className="login-input"
+                    id="password"
+                    type="password"
+                    onChange={this.handleInputChange}
+                    required={true}
+                    placeholder={"Password"}
+                  />
+                </FormGroup>
+                <Button className="btn-block" color="warning" type="submit">
+                  Login
+                </Button>
+              </Form>
+              <div className="mt-4">
+                <Link to="/signup" className="text-primary small">
+                  <span className="">
+                    Don't have an account yet? Signup here
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </Col>
+          <Col sm={4} />
+        </Row>
       </div>
     );
   }

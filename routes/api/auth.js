@@ -8,8 +8,8 @@ const jwt = require("jsonwebtoken");
 const auth = require("../../middleware/auth");
 
 /**
- * @route POST api/auth
- * @desc Auth User
+ *@route POST api/auth
+ *@desc Auth User
  *@access Public
  */
 router.post("/", (req, res) => {
@@ -58,6 +58,7 @@ router.post("/", (req, res) => {
  */
 
 router.get("/user", auth, (req, res) => {
+  console.log("GET - ", req.originalUrl);
   User.findById(req.user.id)
     .select("-password")
     .then(user => {
@@ -65,7 +66,13 @@ router.get("/user", auth, (req, res) => {
     });
 });
 
+/**
+ * @route POST api/auth/user/
+ * @desc POST expenses of particular user
+ * @access Private
+ */
 router.post("/user", auth, (req, res) => {
+  console.log("POST - ", req.originalUrl);
   const userid = req.user.id;
   const { item, amount } = req.body;
   let newExpense = new Expense();
@@ -80,7 +87,13 @@ router.post("/user", auth, (req, res) => {
     });
 });
 
+/**
+ * @route DELETE api/auth/user/:id
+ * @desc Deletes expenses of particular user
+ * @access Private
+ */
 router.delete("/user/:id", auth, (req, res) => {
+  console.log("POST - ", req.originalUrl);
   const userid = req.user.id;
   User.findByIdAndUpdate(
     userid,
@@ -95,17 +108,4 @@ router.delete("/user/:id", auth, (req, res) => {
   );
 });
 
-// router.post("/", auth, (req, res) => {
-//   let newExpense = new Expense();
-//   newExpense.item = req.body.item;
-//   newExpense.amount = req.body.amount;
-//   console.log(`POST - ${req.originalUrl}`);
-//   newExpense.save((err, expense) => {
-//     if (err) {
-//       console.log("MANU ERROR", err);
-//     } else {
-//       res.json(expense);
-//     }
-//   });
-// });
 module.exports = router;

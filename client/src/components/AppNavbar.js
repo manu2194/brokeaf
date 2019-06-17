@@ -27,7 +27,7 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar className="shadow-lg" color="dark" dark expand="md">
-          <NavbarBrand href="/" className="navbar-brand text-warning">
+          <NavbarBrand href="/" id="logo" className="navbar-brand text-warning">
             <img src={favicon} />
             Broke<span className="font-weight-bold">AF</span>
           </NavbarBrand>
@@ -39,7 +39,9 @@ class AppNavbar extends Component {
                 <NavLink href="#">Options</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/manu2194">GitHub</NavLink>
+                <NavLink href="https://github.com/manu2194/brokeaf">
+                  GitHub
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink

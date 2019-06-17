@@ -6,8 +6,8 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 
 /**
- * @route GET api/users
- * @desc Register new user
+ *@route POST api/users
+ *@desc Register new user
  *@access Public
  */
 router.post("/", (req, res) => {
@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
     const newUser = new User({ name, email, password });
 
     //Create salt & hash
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, (error, salt) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
         if (err) {
           throw err;

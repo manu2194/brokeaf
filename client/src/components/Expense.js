@@ -6,6 +6,8 @@ import {
   Button,
   Form,
   FormGroup,
+  FormFeedback,
+  FormText,
   UncontrolledPopover,
   Row,
   Col,
@@ -123,10 +125,14 @@ class Expense extends Component {
                     color="outline-warning"
                     type="submit"
                   >
-                    <span className="font-weight-bold">Add Expense</span>
+                    <span>Add Expense</span>
                   </Button>
                 </InputGroupAddon>
               </InputGroup>
+              <FormText style={{ fontSize: "8px" }}>
+                Enter your expense in the format:{" "}
+                <span className="font-italic">Amount in Item</span>
+              </FormText>
             </FormGroup>
           </Col>
           {/* <Col sm={1}>{addingExpenseTooltip()}</Col> */}
