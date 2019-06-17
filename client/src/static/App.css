@@ -1,18 +1,55 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Cairo&display=swap");
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #2b2b2b;
+  background: rgba(31, 30, 14, 1);
 }
+.login-bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgb(31, 30, 14);
+  background: linear-gradient(
+      90deg,
+      rgba(31, 30, 14, 1) 0%,
+      rgba(42, 31, 0, 1) 100%
+    )
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/* @media only screen and (max-width: 600px) {
+  .login-bg {
+    background: rgb(31, 30, 14);
+  }
+} */
 
 #logo {
-  font-family: "Permanent Marker", cursive;
+  color: #ffc107;
+  font-family: "Righteous", cursive;
+}
+#logo span {
+  color: #f8f9fa;
+}
+
+#greeting {
+  font-family: "Roboto Slab", sans-serif;
 }
 .expense-table-hr {
   border-top: 1px solid rgb(190, 190, 190);
+}
+
+.login-box,
+.signup-box {
+  font-family: "Roboto Slab", sans-serif;
 }
 
 .login-input {
@@ -39,7 +76,7 @@ body {
 .expense-input:focus {
   outline: none;
   border: none;
-
+  font-family: "Cairo", sans-serif;
   background: none;
   border: 1px solid orange;
 }
@@ -138,5 +175,22 @@ body {
   to {
     bottom: 0;
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #greeting {
+    font-size: 20px;
+  }
+
+  .expense-table-heading {
+    font-size: 11px;
+  }
+  .expense-table-card-header .badge {
+    font-size: 10px;
+    font-weight: normal;
+  }
+  #expense-table {
+    font-size: 10px;
   }
 }

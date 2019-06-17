@@ -11,7 +11,9 @@ import {
   Label,
   Alert,
   Row,
-  Col
+  Col,
+  Jumbotron,
+  Container
 } from "reactstrap";
 import logo from "../static/brandon.png";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
@@ -45,7 +47,8 @@ export default class Login extends Component {
         this.props.history.replace("/");
       })
       .catch(err => {
-        document.getElementById("login-failed-alert").style.display = "block";
+        document.getElementById("login-failed-alert").style.visibility =
+          "visible";
       });
   };
 
@@ -57,22 +60,23 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid login">
+        <div className="login-bg" />
         <Row>
           <Col sm={4} />
           <Col sm={4}>
             <div className="login-box mt-5 text-warning">
-              <div className="login-logo row mb-5">
-                <h1 id="logo" className="text-warning mx-auto">
-                  <img src={logo} />
-                  Broke<span className="font-weight-bold">AF</span>
+              <div className="login-logo row mb-2">
+                <h1 id="logo" style={{ fontSize: "50px" }} className="mx-auto">
+                  <img src={logo} alt={"Logo"} />
+                  Broke<span>AF</span>
                 </h1>
               </div>
               <Alert
                 id="login-failed-alert"
                 className="p-1 small"
                 color="danger"
-                style={{ display: "none" }}
+                style={{ visibility: "hidden" }}
               >
                 Incorrect email or password
               </Alert>
@@ -112,6 +116,20 @@ export default class Login extends Component {
           </Col>
           <Col sm={4} />
         </Row>
+        {/* <Row>
+          <div className="col">
+            <div className=" w-50 mx-auto">
+              <Jumbotron className="text-light" style={{ background: "none" }}>
+                <h1>Change the way you manage expenses</h1>
+                <p className="lead">
+                  An easy way to find out how broke you truly are... because you
+                  are. Enter all your expenses in a text format and watch them
+                  get added automatically into your expense table.
+                </p>
+              </Jumbotron>
+            </div>
+          </div>
+        </Row> */}
       </div>
     );
   }

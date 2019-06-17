@@ -168,7 +168,7 @@ class App extends Component {
 
         <div className="container-fluid">
           <Row>
-            <h3 className="text-light mt-4 mx-auto">
+            <h3 id="greeting" className="text-light mt-4 mx-auto">
               {getGreeting()},
               <span className="font-weight-bold"> {this.state.user}</span>
             </h3>
@@ -190,8 +190,10 @@ class App extends Component {
               className="mx-auto mb-5 text-light rounded border border-warning"
             >
               <CardHeader>
-                <Row>
-                  <Col xs="3">Expenses</Col>
+                <Row className="expense-table-card-header">
+                  <Col xs="3">
+                    <div className="expense-table-heading">Expenses</div>
+                  </Col>
                   <Col xs="9">
                     <Badge
                       color={this.totalExpenseBadgeColor(this.state.expenses)}
@@ -199,7 +201,7 @@ class App extends Component {
                       pill
                     >
                       This Month's Expenses:
-                      <span className="ml-2">
+                      <span>
                         ${" "}
                         {this.calculateThisMonthExpenses(
                           this.state.expenses

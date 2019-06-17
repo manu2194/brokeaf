@@ -61,6 +61,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="container-fluid">
+        <div className="login-bg" />
         <Row className="p-3">
           <Col sm={4} />
           <Col sm={4}>

@@ -9,7 +9,7 @@ import registerServiceWorker from "./registerServiceWorker";
 
 ReactDOM.render(
   <Router>
-    <div>
+    <div className="router">
       <Route exact path="/" component={App} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />

@@ -29,7 +29,7 @@ class AppNavbar extends Component {
         <Navbar className="shadow-lg" color="dark" dark expand="md">
           <NavbarBrand href="/" id="logo" className="navbar-brand text-warning">
             <img src={favicon} />
-            Broke<span className="font-weight-bold">AF</span>
+            Broke<span>AF</span>
           </NavbarBrand>
 
           <NavbarToggler onClick={this.toggle} />

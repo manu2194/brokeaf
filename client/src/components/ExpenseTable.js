@@ -49,7 +49,7 @@ class ExpenseTable extends Component {
   render() {
     const { expenses } = this.props.state;
     return (
-      <Table dark responsive hover>
+      <Table id="expense-table" dark responsive hover>
         <thead className="border-0 shadow-lg bg-warning text-dark">
           <tr>
             <th style={{ width: "10%" }}> </th>
