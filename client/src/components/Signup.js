@@ -9,7 +9,8 @@ import {
   FormGroup,
   Label,
   Alert,
-  Col
+  Col,
+  Row
 } from "reactstrap";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
 import axios from "axios";
@@ -58,68 +59,76 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <Card color="dark" className="w-50 mx-auto mt-3 text-warning">
-        <CardHeader>
-          <h3>Sign Up</h3>
+      <div className="container-fluid">
+        <Row>
+          <Col sm="2" />
+          <Col sm="8">
+            <Card color="dark" className="text-warning">
+              <CardHeader>
+                <h3>Sign Up</h3>
 
-          <span>
-            <Link to="/login">Already have an account? Login here</Link>
-          </span>
-        </CardHeader>
+                <span>
+                  <Link to="/login">Already have an account? Login here</Link>
+                </span>
+              </CardHeader>
 
-        <CardBody className="p-5">
-          <Alert
-            id="signup-failed-alert"
-            color="danger"
-            style={{ display: "none" }}
-          >
-            Sign Up Failed
-          </Alert>
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup row>
-              <Label for="name-field">Name</Label>
+              <CardBody className="p-5">
+                <Alert
+                  id="signup-failed-alert"
+                  color="danger"
+                  style={{ display: "none" }}
+                >
+                  Sign Up Failed
+                </Alert>
+                <Form onSubmit={this.handleSubmit}>
+                  <FormGroup row>
+                    <Label for="name-field">Name</Label>
 
-              <Input
-                type="text"
-                name="name"
-                className="text-light expense-input"
-                id="name-field"
-                placeholder="Enter your full name"
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-            <FormGroup row>
-              <Label for="email-field">Email</Label>
+                    <Input
+                      type="text"
+                      name="name"
+                      className="text-light expense-input"
+                      id="name-field"
+                      placeholder="Enter your full name"
+                      onChange={this.handleInputChange}
+                    />
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="email-field">Email</Label>
 
-              <Input
-                type="email"
-                name="email"
-                className="text-light expense-input"
-                id="email-field"
-                placeholder="Enter your Email"
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-            <FormGroup row>
-              <Label for="password-field">Password</Label>
+                    <Input
+                      type="email"
+                      name="email"
+                      className="text-light expense-input"
+                      id="email-field"
+                      placeholder="Enter your Email"
+                      onChange={this.handleInputChange}
+                    />
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="password-field">Password</Label>
 
-              <Input
-                type="password"
-                name="password"
-                className="text-light expense-input"
-                id="password-field"
-                placeholder="Enter your Password"
-                onChange={this.handleInputChange}
-              />
-            </FormGroup>
-            <FormGroup row>
-              <Button className="btn-block mt-3" color="warning">
-                Submit
-              </Button>
-            </FormGroup>
-          </Form>
-        </CardBody>
-      </Card>
+                    <Input
+                      type="password"
+                      name="password"
+                      className="text-light expense-input"
+                      id="password-field"
+                      placeholder="Enter your Password"
+                      onChange={this.handleInputChange}
+                    />
+                  </FormGroup>
+                  <FormGroup row>
+                    <Button className="btn-block mt-3" color="warning">
+                      Submit
+                    </Button>
+                  </FormGroup>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col sm="2" />
+        </Row>
+      </div>
     );
   }
 }

@@ -54,56 +54,60 @@ export default class Login extends Component {
 
   render() {
     return (
-      <Card
-        color="dark"
-        style={{ width: "40%" }}
-        className="mx-auto mt-5 text-warning shadow-lg"
-      >
-        <CardHeader>
-          <h3>Login</h3>
-        </CardHeader>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3" />
+          <div className="col-sm-6">
+            <Card color="dark" className="text-warning shadow-lg">
+              <CardHeader>
+                <h3>Login</h3>
+              </CardHeader>
 
-        <CardBody className="p-5">
-          <Alert
-            id="login-failed-alert"
-            color="danger"
-            style={{ display: "none" }}
-          >
-            Email or password does not exist
-          </Alert>
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup>
-              <Label for="email">Enter your email</Label>
-              <Input
-                className="text-light expense-input mb-2"
-                id="email"
-                onChange={this.handleInputChange}
-                required={true}
-                type="email"
-              />
-              <Label for="password">Enter your password</Label>
-              <Input
-                className="text-light expense-input"
-                id="password"
-                type="password"
-                onChange={this.handleInputChange}
-                required={true}
-              />
-            </FormGroup>
-            <Button className="btn-block" color="warning" type="submit">
-              Login
-            </Button>
-          </Form>
-          <div className="mt-4">
-            <Link to="/signup">
-              <span>
-                Don't have an account yet?
-                <span className="font-weight-bold">Signup here.</span>
-              </span>
-            </Link>
+              <CardBody className="p-5">
+                <Alert
+                  id="login-failed-alert"
+                  color="danger"
+                  style={{ display: "none" }}
+                >
+                  Email or password does not exist
+                </Alert>
+                <Form onSubmit={this.handleSubmit}>
+                  <FormGroup>
+                    <Label for="email">Enter your email</Label>
+                    <Input
+                      className="text-light expense-input mb-2"
+                      id="email"
+                      onChange={this.handleInputChange}
+                      required={true}
+                      type="email"
+                    />
+                    <Label for="password">Enter your password</Label>
+                    <Input
+                      className="text-light expense-input"
+                      id="password"
+                      type="password"
+                      onChange={this.handleInputChange}
+                      required={true}
+                    />
+                  </FormGroup>
+                  <Button className="btn-block" color="warning" type="submit">
+                    Login
+                  </Button>
+                </Form>
+                <div className="mt-4">
+                  <Link to="/signup">
+                    <span>
+                      Don't have an account yet?
+                      <span className="font-weight-bold">Signup here.</span>
+                    </span>
+                  </Link>
+                </div>
+              </CardBody>
+            </Card>
           </div>
-        </CardBody>
-      </Card>
+          <div className="col-sm-3" />
+        </div>
+      </div>
     );
   }
 }
