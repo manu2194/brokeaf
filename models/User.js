@@ -1,32 +1,43 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const expense = require("./expense");
 const Schema = mongoose.Schema;
 
+const ExpenseSchema = new Schema({
+  item: {
+    type: String,
+    required: true
+  },
+  amount: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
 const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
-    require: true,
+    required: true,
     unique: true
   },
   password: {
     type: String,
     required: true
+  },
+  register_date: {
+    type: Date,
+    default: Date.now
+  },
+  expense: {
+    type: [ExpenseSchema]
   }
 });
 
-UserSchema.pre("save", function(next) {
-  if (this.isNew || this.isModified("password")) {
-    const document = this;
-    bcrypt.hash(document.password, saltRounds, function(err, hashedPassword) {
-      if (err) {
-        next(err);
-      } else {
-        document.password = hashedPassword;
-        next();
-      }
-    });
-  } else {
-    next();
-  }
-});
-module.exports = mongoose.model("User", UserSchema);
+module.exports = User = mongoose.model("user", UserSchema);

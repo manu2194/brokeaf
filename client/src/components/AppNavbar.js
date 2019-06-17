@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import favicon from "../static/favicon.ico";
-import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -10,7 +9,6 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import App from "../App";
 
 class AppNavbar extends Component {
   state = { isOpen: false };
@@ -19,6 +17,11 @@ class AppNavbar extends Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  };
+
+  handleLogout = event => {
+    event.preventDefault();
+    this.props.handleLogout();
   };
   render() {
     return (
@@ -31,14 +34,21 @@ class AppNavbar extends Component {
 
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-0" navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="#">Options</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/manu2194">GitHub</NavLink>
               </NavItem>
-              <NavItem />
+              <NavItem>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  onClick={this.handleLogout}
+                >
+                  Logout
+                </NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>

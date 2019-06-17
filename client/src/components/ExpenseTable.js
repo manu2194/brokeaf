@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Col,
-  Button,
-  UncontrolledTooltip,
-  Table
-} from "reactstrap";
+import { Button, UncontrolledTooltip, Table } from "reactstrap";
 /**
  * Function Component for Tooltip. Add it to the parent class of the component for which you need a tooltip.
  * @param {*Object} Object of the class that calls this function
@@ -68,7 +60,7 @@ class ExpenseTable extends Component {
         </thead>
         <tbody>
           {expenses.map(expense => (
-            <tr key={expense.id}>
+            <tr key={expense._id}>
               <th scope="row">
                 {removeButton(expense, this)}
                 {removeExpenseToolTip(expense)}

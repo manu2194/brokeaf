@@ -1,5 +1,5 @@
 const express = require("express");
-
+const auth = require("../../middleware/auth");
 const router = express.Router();
 
 const Expense = require("../../models/expense");
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 });
 
 //POST request
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
   let newExpense = new Expense();
   newExpense.item = req.body.item;
   newExpense.amount = req.body.amount;
@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
   console.log(`DELETE - ${req.originalUrl}`);
   Expense.findById(req.params.id)
     .then(expense => expense.remove().then(() => res.json({ success: true })))

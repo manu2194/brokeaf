@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+
 import {
   Spinner,
   Card,
@@ -7,7 +7,8 @@ import {
   CardHeader,
   Row,
   Col,
-  Badge
+  Badge,
+  Button
 } from "reactstrap";
 import AppNavbar from "./components/AppNavbar";
 import Expense from "./components/Expense";
@@ -15,9 +16,10 @@ import ExpenseTable from "./components/ExpenseTable";
 import "./static/App.css";
 import "./static/scripts";
 import "./static/brandon.png";
-import { snackBar } from "./static/scripts";
-
-var axios = require("axios");
+import { snackBar, getGreeting } from "./static/scripts";
+import AuthHelperMethods from "./utilities/AuthHelperMethods";
+import withAuth from "./components/withAuth";
+const axios = require("axios");
 
 /**
  * Spinner icon component that is set to be visible if the parameter loadingFlag is set to be true.
@@ -35,28 +37,40 @@ function SpinnerIcon(loadingFlag) {
 }
 class App extends Component {
   state = {
+    user: "",
     expenses: [],
     loading: false
+  };
+  Auth = new AuthHelperMethods();
+  _handleLogout = () => {
+    this.Auth.logout();
+    this.props.history.replace("/login");
   };
 
   componentDidMount() {
     //Called to as soon as Component is rendered
     this.setState({ loading: true });
-    axios.get("/api/expenses").then(res => {
-      const expenses = res.data;
-      //Converting MongoDB date format to pretty JavaScript date format
-      expenses.map((expense, index) => {
-        expenses[index] = {
-          _id: expense._id,
-          item: expense.item,
-          amount: expense.amount,
-          date: expense.date
-          //date: new Date(expense.date).toLocaleString().split(",")[0]
-        };
+    axios
+      .get("/api/auth/user", {
+        headers: {
+          "x-auth-token": this.Auth.getToken()
+        }
+      })
+      .then(res => {
+        const expenses = res.data.expense;
+        expenses.map((expense, index) => {
+          expenses[index] = {
+            _id: expense._id,
+            item: expense.item,
+            amount: expense.amount,
+            date: expense.date
+            //date: new Date(expense.date).toLocaleString().split(",")[0]
+          };
+        });
+        this.setState({ user: res.data.name });
+        this.setState({ loading: false });
+        this.setState({ expenses });
       });
-      this.setState({ loading: false });
-      this.setState({ expenses });
-    });
   }
 
   calculateThisMonthExpenses = expenseArray => {
@@ -81,13 +95,24 @@ class App extends Component {
 
   handleSubmitExpense = expenseObject => {
     //POST to Backend Epi, each expense Object
+    const config = {
+      headers: {
+        "x-auth-token": this.Auth.getToken()
+      }
+    };
     expenseObject.forEach(expense => {
       this.setState({ loading: true });
       //console.log(expense);
+
+      //need to post the token with the expense object.
       axios
-        .post("/api/expenses", expense)
+        .post("/api/auth/user", expense, config)
         .then(res => {
+          //console.log(res);
           snackBar();
+        })
+        .catch(err => {
+          console.log("Error adding item\n" + err);
         })
         .finally(() => {
           this.componentDidMount();
@@ -99,21 +124,56 @@ class App extends Component {
    * @param {string} removeId
    */
   removeExpenseHandler = removeId => {
-    this.setState(state => ({
-      expenses: state.expenses.filter(expense => expense._id !== removeId)
-    }));
+    const config = {
+      params: {
+        _id: removeId
+      },
+      headers: {
+        "x-auth-token": this.Auth.getToken()
+      }
+    };
     axios
-      .delete(`/api/expenses/${removeId}`, { params: { _id: removeId } })
+      .delete(`/api/auth/user/${removeId}`, config)
       .then(res => {
         //console.log(res);
+        this.setState(state => ({
+          expenses: state.expenses.filter(expense => expense._id !== removeId)
+        }));
+      })
+      .catch(err => {
+        console.log("Cannot delete item!\n" + err);
+      });
+  };
+
+  testPost = () => {
+    const test = { msg: "hello fuckers" };
+    axios
+      .post("/api/auth/user", test, {
+        headers: {
+          "x-auth-token": this.Auth.getToken()
+        }
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log("ERROR", err);
       });
   };
 
   render() {
     return (
       <div className="App">
-        <AppNavbar />
+        <AppNavbar handleLogout={this._handleLogout} />
+
         <div className="container-fluid">
+          <Row>
+            <h3 className="text-light mt-4 mx-auto">
+              {getGreeting()},
+              <span className="font-weight-bold"> {this.state.user}</span>
+            </h3>
+          </Row>
+
           <Row>
             <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
               <Expense
@@ -174,4 +234,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuth(App);

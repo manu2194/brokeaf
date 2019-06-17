@@ -30,6 +30,10 @@ body {
   box-shadow: 0 0 0px 0px rgba(255, 166, 0, 0) !important;
   transition: box-shadow background-color 1ms ease;
 }
+.button-glow-login {
+  box-shadow: 0 0 0px 0px rgba(255, 166, 0, 0) !important;
+  transition: box-shadow background-color 1ms ease;
+}
 
 .button-glow:focus,
 .button-glow:active,

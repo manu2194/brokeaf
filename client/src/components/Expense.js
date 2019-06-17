@@ -7,14 +7,13 @@ import {
   Form,
   FormGroup,
   UncontrolledPopover,
-  UncontrolledTooltip,
   Row,
   Col,
   PopoverHeader,
   PopoverBody
 } from "reactstrap";
 import "../static/scripts";
-import { realTimeEditing, stringifyList } from "../static/scripts";
+import { realTimeEditing } from "../static/scripts";
 const uuid = require("uuid");
 
 function addingExpenseTooltip() {
@@ -59,12 +58,12 @@ class Expense extends Component {
         invalidExpenses.push(expense.trim());
       }
     });
-    console.log(invalidExpenses);
+    //console.log(invalidExpenses);
     return { valid: validExpenses, invalid: invalidExpenses };
   };
   getAllExpenses = value => {
     //Regular Expression. We are only looking for expressions that match <Some amount> <some word like in,for> <Some item>
-    var re = /(\d+ \w+ \w+)+/;
+    //var re = /(\d+ \w+ \w+)+/;
     var allExpenses = value.split(",");
     var { valid, invalid } = this.getValidInvalidExpenses(allExpenses);
     if (invalid.length > 0) {

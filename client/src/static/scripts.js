@@ -52,3 +52,16 @@ export function snackBar() {
     x.className = x.className.replace("show", "");
   }, 2000);
 }
+
+export function getGreeting() {
+  var today = new Date();
+  var curHr = today.getHours();
+
+  if (curHr < 12) {
+    return "Good Morning";
+  } else if (curHr < 18) {
+    return "Good Afternoon";
+  } else {
+    return "Good Evening";
+  }
+}
