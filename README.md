@@ -2,7 +2,9 @@
 
 ## Overview
 
-BrokeAF is a online expense manager with the intention of employing a purely text-based input. If the user wants to enter an expense, they only have to type an expression such as _20 for haircut_. This is an ongoing project and as such a lot of features are as of now unavailble or incomplete, such as user creation and registration.
+[BrokeAF](https://bafem.herokuapp.com/) is a online expense manager with the intention of employing a purely text-based input. If the user wants to enter an expense, they only have to type an expression such as _20 for haircut_. This is an ongoing project and as such a lot of features are as of now unavailble or incomplete, changing passwords and expense analyctics.
+
+You can visit the website at [bafem.herokuapp.com](https://bafem.herokuapp.com/).
 
 ## How to use
 
