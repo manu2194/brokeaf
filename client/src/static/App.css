@@ -7,7 +7,7 @@
 @import url("https://fonts.googleapis.com/css?family=Cairo&display=swap");
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto Slab", sans-serif;
   background: rgba(31, 30, 14, 1);
 }
 .login-bg {
@@ -108,16 +108,23 @@ body {
   align-items: center;
   text-align: center;
 }
+.expense-list-item {
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.2s ease;
+}
+.expense-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.068);
+}
 
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
-  color: black; /* White text color */
-  background-color: rgba(45, 231, 92, 0.932);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.13);
+  color: rgb(218, 218, 218); /* White text color */
+  background-color: #28a746b6;
+  padding: 10px;
+  border-radius: 6px;
   text-align: center; /* Centered text */
-  border-radius: 16px;
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
   left: 50%; /* Center the snackbar */

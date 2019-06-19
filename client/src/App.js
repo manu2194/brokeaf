@@ -167,12 +167,12 @@ class App extends Component {
         <AppNavbar handleLogout={this._handleLogout} />
 
         <div className="container-fluid">
-          <Row>
+          {/* <Row>
             <h3 id="greeting" className="text-light mt-4 mx-auto">
               {getGreeting()},
               <span className="font-weight-bold"> {this.state.user}</span>
             </h3>
-          </Row>
+          </Row> */}
 
           <Row>
             <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
@@ -217,6 +217,7 @@ class App extends Component {
                   <ExpenseTable
                     color="dark"
                     state={this.state}
+                    expenses={this.state.expenses}
                     removeExpense={this.removeExpenseHandler}
                   />
                 ) : (
@@ -227,7 +228,7 @@ class App extends Component {
               </CardBody>
             </Card>
           </Row>
-          <div className="pt-2 pb-2 pr-2 pl-2" id="snackbar">
+          <div className="small p-3" id="snackbar">
             Added Expense
           </div>
         </div>

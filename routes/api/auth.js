@@ -93,7 +93,7 @@ router.post("/user", auth, (req, res) => {
  * @access Private
  */
 router.delete("/user/:id", auth, (req, res) => {
-  console.log("POST - ", req.originalUrl);
+  console.log("DELETE - ", req.originalUrl);
   const userid = req.user.id;
   User.findByIdAndUpdate(
     userid,

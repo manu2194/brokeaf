@@ -82,8 +82,9 @@ export default class Login extends Component {
               </Alert>
               <Form onSubmit={this.handleSubmit}>
                 <FormGroup className="mx-auto">
-                  {/* <Label for="email">Enter your email</Label> */}
                   <Input
+                    autoComplete="nope"
+                    name="email"
                     className="login-input mb-2"
                     id="email"
                     onChange={this.handleInputChange}
@@ -91,7 +92,6 @@ export default class Login extends Component {
                     type="email"
                     placeholder={"Email"}
                   />
-                  {/* <Label for="password">Enter your password</Label> */}
                   <Input
                     className="login-input"
                     id="password"

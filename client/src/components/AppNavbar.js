@@ -35,14 +35,14 @@ class AppNavbar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="#">Options</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/manu2194/brokeaf">
                   GitHub
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink
                   style={{ cursor: "pointer" }}
