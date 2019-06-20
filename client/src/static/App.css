@@ -16,8 +16,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  font-family: "Cairo", sans-serif;
-  color: rgb(240, 164, 240);
+  color: rgb(255, 232, 27);
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: #fff !important;
 }
@@ -76,16 +75,8 @@ input:-webkit-autofill:active {
   color: #f8f9fa;
 }
 
-#greeting {
-  font-family: "Roboto Slab", sans-serif;
-}
 .expense-table-hr {
   border-top: 1px solid rgb(190, 190, 190);
-}
-
-.login-box,
-.signup-box {
-  font-family: "Roboto Slab", sans-serif;
 }
 
 .login-input {

@@ -7,18 +7,11 @@ import {
   Form,
   FormGroup,
   FormText,
-  UncontrolledPopover,
-  Card,
-  CardColumns,
-  CardDeck,
   Row,
-  Col,
-  PopoverHeader,
-  PopoverBody
+  Col
 } from "reactstrap";
 import "../static/scripts";
 import ExpenseParsingMethods from "../utilities/ExpenseParsingMethods";
-import { realTimeEditing } from "../static/scripts";
 const uuid = require("uuid");
 
 class Expense extends Component {
@@ -39,9 +32,17 @@ class Expense extends Component {
       }
     }
   };
+  /**
+   * Returns all valid expenses, if any. Else returns false
+   * @param {string} value
+   */
   getAllExpenses = value => {
     var valid = this.EPM.parseExpense(value);
-    return valid;
+    if (valid) {
+      return valid;
+    } else {
+      return false;
+    }
   };
 
   handleInputChange = event => {
@@ -50,48 +51,57 @@ class Expense extends Component {
       this.setState({ expense: target.value });
     }
   };
-
+  /**
+   * Parses the expense to extract item name and amount.
+   * @param {string} expenseFieldValue
+   * @returns {Object}
+   */
   parseExpense = expenseFieldValue => {
     var { item, amount } = this.EPM.extractExpenseInformation(
       expenseFieldValue
     );
-    var date = new Date().toLocaleDateString();
-    var id = uuid();
 
-    return { id: id, item: item, amount: amount, date: date };
+    return { item: item, amount: amount };
   };
+  /**
+   * Takes event object of the called input element, extracts the valid expenses from the value field of the input
+   * element and submits to the props of the parent component
+   * @param {object} event
+   */
   handleSubmit = event => {
     event.preventDefault();
+
     var allExpenses = this.getAllExpenses(this.state.expense);
+
     var allExpensesObjectList = [];
-    allExpenses.forEach(expense => {
-      allExpensesObjectList.push(this.parseExpense(expense));
-    });
-    this.props.submitExpense(allExpensesObjectList);
+    if (allExpenses) {
+      allExpenses.forEach(expense => {
+        allExpensesObjectList.push(this.parseExpense(expense));
+      });
+
+      this.props.submitExpense(allExpensesObjectList);
+    } else {
+      document.getElementById("expense-error").style.visibility = "visible";
+    }
   };
 
   render() {
     return (
       <React.Fragment>
-        {/* {this.state.validExpenses !== null ? (
-          <Row className="mb-1">
-            <Col sm={12}>
-              {this.state.validExpenses.map((eachValidExpense, index) => (
-                <Button
-                  style={{ fontSize: "10px" }}
-                  className="p-1 mr-1"
-                  color="success"
-                  size="sm"
-                >
-                  {eachValidExpense}
-                </Button>
-              ))}
-            </Col>
-          </Row>
-        ) : (
-          <React.Fragment />
-        )} */}
-        <Form onSubmit={this.handleSubmit}>
+        <Row>
+          <Col sm={4}>
+            <div
+              id="expense-error"
+              style={{ visibility: "hidden" }}
+              className="badge bg-danger pill"
+            >
+              <small className="text-light">
+                There are errors in one or more of your expenses!
+              </small>
+            </div>
+          </Col>
+        </Row>
+        <Form className="mt-2" onSubmit={this.handleSubmit}>
           <Row>
             <Col sm={12}>
               <FormGroup>

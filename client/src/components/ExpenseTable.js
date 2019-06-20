@@ -104,7 +104,12 @@ class ExpenseTable extends Component {
                     className="expense-list-item bg-none flex-column align-items-start"
                   >
                     <div className="d-flex w-100 justify-content-between">
-                      <h6 className="font-weight-bold">{expense.item}</h6>
+                      <h6
+                        style={{ textTransform: "capitalize" }}
+                        className="expense-name font-weight-bold"
+                      >
+                        {expense.item}
+                      </h6>
                       <small>{removeButton(expense, this)}</small>
                     </div>
 
