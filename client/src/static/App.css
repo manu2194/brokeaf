@@ -5,10 +5,21 @@
 @import url("https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Cairo&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap");
 
 body {
-  font-family: "Roboto Slab", sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   background: rgba(31, 30, 14, 1);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  font-family: "Cairo", sans-serif;
+  color: rgb(240, 164, 240);
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #fff !important;
 }
 .login-bg {
   width: 100%;
@@ -25,6 +36,31 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+#error-404 {
+  position: relative;
+}
+#error-404-background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgb(31, 30, 14);
+  background: url("../images/error404.jpg");
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#error-404-text {
+  background-color: rgba(0, 0, 0, 0.575);
+  box-shadow: 0 0 16px 16px rgba(0, 0, 0, 0.123);
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 /* @media only screen and (max-width: 600px) {
   .login-bg {
@@ -108,12 +144,23 @@ body {
   align-items: center;
   text-align: center;
 }
+/*ExpenseTableAPP*/
+#expense-table {
+  font-family: "Nanum Gothic", sans-serif;
+}
 .expense-list-item {
+  color: white;
+  font-weight: lighter;
   background-color: rgba(255, 255, 255, 0);
-  transition: background-color 0.2s ease;
+  border-color: rgba(0, 0, 0, 0.137);
+  transition: color, background-color, border-color 0.2s ease;
 }
 .expense-list-item:hover {
   background-color: rgba(255, 255, 255, 0.068);
+  border-color: rgba(190, 124, 0, 0.384);
+  color: #ffc107;
+}
+#expense-table .expense-amount {
 }
 
 #snackbar {
@@ -190,9 +237,9 @@ body {
     font-size: 20px;
   }
 
-  .expense-table-heading {
-    font-size: 11px;
-  }
+  /* .expense-table-heading {
+    font-size: 12px;
+  } */
   .expense-table-card-header .badge {
     font-size: 10px;
     font-weight: normal;

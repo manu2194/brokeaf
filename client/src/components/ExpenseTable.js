@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import {
   Button,
   Card,
-  CardBody,
-  CardHeader,
+  UncontrolledCollapse,
   ListGroup,
-  ListGroupItem,
-  ListGroupItemHeading,
-  ListGroupItemText
+  ListGroupItem
 } from "reactstrap";
 import ExpensSortingMethods from "../utilities/ExpenseSortingMethods";
 
@@ -17,20 +14,12 @@ import ExpensSortingMethods from "../utilities/ExpenseSortingMethods";
  * @param {*Object} Object of the class that calls this function
  */
 function removeButton(expense, object) {
-  const style = {
-    color: "red",
-    textShadow: "none",
-    fontFamily: "Arial",
-    outline: "none",
-    boxShadow: "none",
-    border: "none"
-  };
   return (
     <Button
       id={`delete-expense-${expense._id}`}
-      style={style}
       type="button"
-      close
+      className="rounded"
+      color="outline-danger"
       onClick={() => object.removeExpenseHandler(expense._id)}
     >
       &times;
@@ -61,6 +50,7 @@ class ExpenseTable extends Component {
     var groupedExpenses = ESM.groupByDate(expenses);
     return groupedExpenses;
   }
+
   componentDidMount() {
     var propsExpenses = this.props.expenses;
     propsExpenses.sort(function(a, b) {
@@ -89,28 +79,43 @@ class ExpenseTable extends Component {
     const { expenses } = this.state;
     return (
       <div id="expense-table">
-        {Object.keys(this.state.groupedExpenses).map(date => (
-          <Card color="dark border-0" className="m-2" key={date}>
-            <div className="bg-none pt-2 pb-2 ml-2">
-              <h4>{new Date(date).toDateString()}</h4>
-            </div>
-
-            <ListGroup className="mb-2 ml-4" flush>
-              {this.state.groupedExpenses[date].map(expense => (
-                <ListGroupItem
-                  key={expense._id}
-                  className="expense-list-item bg-none flex-column align-items-start"
+        {Object.keys(this.state.groupedExpenses).map((date, index) => (
+          <React.Fragment key={date}>
+            <Card color="dark border-0" className="m-2">
+              <div className="bg-none pt-2 pb-2 ml-2">
+                <a
+                  style={{ cursor: "pointer", fontSize: "22px" }}
+                  className="text-warning"
+                  id={"toggler-" + index}
+                  size="lg"
                 >
-                  <div className="d-flex w-100 justify-content-between">
-                    <h5 className="font-weight-bold">{expense.item}</h5>
-                    <small>{removeButton(expense, this)}</small>
-                  </div>
+                  {new Date(date).toDateString()}
+                </a>
+              </div>
+              {/* <UncontrolledCollapse
+                id={index + "-toggler"}
+                toggler={"#toggler-" + index}
+                clas
+              > */}
+              <ListGroup className="mb-2 ml-4" flush>
+                {this.state.groupedExpenses[date].map(expense => (
+                  <ListGroupItem
+                    key={expense._id}
+                    className="expense-list-item bg-none flex-column align-items-start"
+                  >
+                    <div className="d-flex w-100 justify-content-between">
+                      <h6 className="font-weight-bold">{expense.item}</h6>
+                      <small>{removeButton(expense, this)}</small>
+                    </div>
 
-                  <p className="mb-1">${expense.amount}</p>
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          </Card>
+                    <p className="expense-amount mb-1">${expense.amount}</p>
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+              {/* </UncontrolledCollapse> */}
+            </Card>
+            <hr />
+          </React.Fragment>
         ))}
       </div>
     );

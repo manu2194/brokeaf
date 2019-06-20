@@ -191,10 +191,10 @@ class App extends Component {
             >
               <CardHeader>
                 <Row className="expense-table-card-header">
-                  <Col xs="3">
+                  <Col xs="6">
                     <div className="expense-table-heading">Expenses</div>
                   </Col>
-                  <Col xs="9">
+                  <Col xs="6">
                     <Badge
                       color={this.totalExpenseBadgeColor(this.state.expenses)}
                       className="p-2 float-right"
