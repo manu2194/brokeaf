@@ -6,7 +6,8 @@ import {
   ListGroup,
   ListGroupItem
 } from "reactstrap";
-import ExpensSortingMethods from "../utilities/ExpenseSortingMethods";
+import ExpenseSortingMethods from "../utilities/ExpenseSortingMethods";
+import GeneralUtils from "../utilities/GeneralUtils";
 
 /**
  * Remove button component.
@@ -46,7 +47,7 @@ class ExpenseTable extends Component {
   };
 
   sortExpenses(expenses) {
-    const ESM = new ExpensSortingMethods();
+    const ESM = new ExpenseSortingMethods();
     var groupedExpenses = ESM.groupByDate(expenses);
     return groupedExpenses;
   }
@@ -76,6 +77,7 @@ class ExpenseTable extends Component {
   };
 
   render() {
+    const GU = new GeneralUtils();
     const { expenses } = this.state;
     return (
       <div id="expense-table">
@@ -113,7 +115,9 @@ class ExpenseTable extends Component {
                       <small>{removeButton(expense, this)}</small>
                     </div>
 
-                    <p className="expense-amount mb-1">${expense.amount}</p>
+                    <p className="expense-amount mb-1">
+                      ${GU.prettyNumber(expense.amount)}
+                    </p>
                   </ListGroupItem>
                 ))}
               </ListGroup>

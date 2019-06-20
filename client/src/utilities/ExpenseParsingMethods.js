@@ -1,11 +1,16 @@
 export default class ExpenseParsingMethods {
   /**
-   * Parse the string to extract the item name and the amount
+   * @constant {regex}
    */
-
-  mainRegexPattern = /([(\d)\.]+ \w+ [\w\s'"?\!\\/|^%$()*@#&]+)|[\w\s'"?\!\\/|^%$()*@#&]+ \w+ ([(\d)\.]+)/g; // regex for format [number] [anyword] [any word or words]
+  mainRegexPattern = /((\b([\d.,]+)\b)+ \w+ [\w\s'"?\!\\/|^%$()*@#&]+)|[\w\s'"?\!\\/|^%$()*@#&]+ \w+ ((\b([\d.,]+)\b)+)/g; // regex for format [number] [anyword] [any word or words]
   mainRegexPattern2 = /(\w+ \w+ [\w\s]+)/g; //regex for format [anyword] [anyword] [anyword]
 
+  /**
+   * Parses the string argument to extract all sentences that matches the regular expression pattern provided
+   * @param {String} expense The expense string to parse
+   * @param {RegExp} regexPattern The regular expression pattern to use
+   * @returns {Array}
+   */
   parseExpense = (expense, regexPattern = null) => {
     var re;
     if (regexPattern === null) {
@@ -17,11 +22,18 @@ export default class ExpenseParsingMethods {
     return validExpenses;
   };
 
+  /**
+   * Extracts and returns the expense item and amount from the expense string
+   * @param {String} expense The expense string
+   * @returns {Object}
+   */
   extractExpenseInformation = expense => {
-    var amount = expense.match(/\b([\d]+)\b/g)[0];
+    var oldamount = expense.match(/\b([\d.,]+)\b/g)[0];
+    var amount = oldamount.replace(/,/g, "");
+    expense = expense.replace(oldamount, amount);
     var words = expense.split(" ").filter(element => element != amount);
     var item = "";
-    var excludeWordsPattern = ["for", "in"];
+    var excludeWordsPattern = ["for", "in", "dollars", "bucks"];
     words.forEach(element => {
       if (!excludeWordsPattern.includes(element)) {
         item += element + " ";

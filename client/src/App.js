@@ -18,6 +18,7 @@ import "./static/scripts";
 import "./static/brandon.png";
 import { snackBar, getGreeting } from "./static/scripts";
 import AuthHelperMethods from "./utilities/AuthHelperMethods";
+import GeneralUtils from "./utilities/GeneralUtils";
 import withAuth from "./components/withAuth";
 const axios = require("axios");
 
@@ -42,6 +43,7 @@ class App extends Component {
     loading: false
   };
   Auth = new AuthHelperMethods();
+  GU = new GeneralUtils();
   _handleLogout = () => {
     this.Auth.logout();
     this.props.history.replace("/login");
@@ -203,9 +205,9 @@ class App extends Component {
                       This Month's Expenses:
                       <span>
                         ${" "}
-                        {this.calculateThisMonthExpenses(
-                          this.state.expenses
-                        ).toFixed(2)}
+                        {this.GU.prettyNumber(
+                          this.calculateThisMonthExpenses(this.state.expenses)
+                        )}
                       </span>
                     </Badge>
                   </Col>
