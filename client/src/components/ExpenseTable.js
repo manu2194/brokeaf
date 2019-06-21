@@ -19,8 +19,9 @@ function removeButton(expense, object) {
     <Button
       id={`delete-expense-${expense._id}`}
       type="button"
-      className="rounded"
+      className="rounded-circle border-0"
       color="outline-danger"
+      size="md"
       onClick={() => object.removeExpenseHandler(expense._id)}
     >
       &times;
@@ -76,6 +77,20 @@ class ExpenseTable extends Component {
     this.props.removeExpense(id);
   };
 
+  displayRemoveButton = event => {
+    var target = event.target;
+    var id = target.id.split("-")[2];
+    var removeButton = document.getElementById(`delete-expense-${id}`);
+    if (removeButton) removeButton.style.visibility = "visible";
+  };
+  hideRemoveButtom = event => {
+    var target = event.target;
+    var id = target.id.split("-")[2];
+    console.log("HIDE", id);
+    var removeButton = document.getElementById(`delete-expense-${id}`);
+    if (removeButton) removeButton.style.visibility = "hidden";
+  };
+
   render() {
     const GU = new GeneralUtils();
     const { expenses } = this.state;
@@ -103,6 +118,7 @@ class ExpenseTable extends Component {
                 {this.state.groupedExpenses[date].map(expense => (
                   <ListGroupItem
                     key={expense._id}
+                    id={"expense-item-" + expense._id}
                     className="expense-list-item bg-none flex-column align-items-start"
                   >
                     <div className="d-flex w-100 justify-content-between">

@@ -121,6 +121,7 @@ body {
   box-shadow: 0 0 10px 1px rgba(255, 166, 0, 0.39) !important;
 }
 #spinner-icon {
+  position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -231,4 +232,31 @@ body {
   #expense-table {
     font-size: 10px;
   }
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffc10736;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffc1078f;
+  border-radius: 10px;
+}
+
+/* Common colors */
+.shadow-darker {
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.212);
 }

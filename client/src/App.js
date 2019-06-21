@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import {
   Spinner,
   Card,
@@ -192,15 +191,12 @@ class App extends Component {
                 color="dark"
                 className="mx-auto mb-5 text-light rounded border border-warning"
               >
-                <CardHeader>
+                <CardHeader className=" shadow-darker sticky-top">
                   <Row className="expense-table-card-header">
-                    <Col xs="6">
-                      <div className="expense-table-heading">Expenses</div>
-                    </Col>
-                    <Col xs="6">
+                    <Col className="mx-auto">
                       <Badge
                         color={this.totalExpenseBadgeColor(this.state.expenses)}
-                        className="p-2 float-right"
+                        className="p-2"
                         pill
                       >
                         This Month's Expenses:
@@ -214,8 +210,8 @@ class App extends Component {
                     </Col>
                   </Row>
                 </CardHeader>
-                {SpinnerIcon(this.state.loading)}
-                <CardBody className="pl-0 pr-0">
+                {/* {SpinnerIcon(this.state.loading)} */}
+                <CardBody className="pl-0 pr-0 pt-0 pre-scrollable">
                   {this.state.expenses.length > 0 ? (
                     <ExpenseTable
                       color="dark"
