@@ -112,6 +112,7 @@ class App extends Component {
         .then(res => {
           //console.log(res);
           snackBar();
+          document.getElementById("expense-field").value = "";
         })
         .catch(err => {
           console.log("Error adding item\n" + err);
@@ -186,49 +187,50 @@ class App extends Component {
           </Row>
 
           <Row>
-            <Card
-              style={{ width: "90%" }}
-              color="dark"
-              className="mx-auto mb-5 text-light rounded border border-warning"
-            >
-              <CardHeader>
-                <Row className="expense-table-card-header">
-                  <Col xs="6">
-                    <div className="expense-table-heading">Expenses</div>
-                  </Col>
-                  <Col xs="6">
-                    <Badge
-                      color={this.totalExpenseBadgeColor(this.state.expenses)}
-                      className="p-2 float-right"
-                      pill
-                    >
-                      This Month's Expenses:
-                      <span>
-                        ${" "}
-                        {this.GU.prettyNumber(
-                          this.calculateThisMonthExpenses(this.state.expenses)
-                        )}
-                      </span>
-                    </Badge>
-                  </Col>
-                </Row>
-              </CardHeader>
-              {SpinnerIcon(this.state.loading)}
-              <CardBody className="pl-0 pr-0">
-                {this.state.expenses.length > 0 ? (
-                  <ExpenseTable
-                    color="dark"
-                    state={this.state}
-                    expenses={this.state.expenses}
-                    removeExpense={this.removeExpenseHandler}
-                  />
-                ) : (
-                  <div className="row">
-                    <span className="mx-auto"> You have no expenses</span>
-                  </div>
-                )}
-              </CardBody>
-            </Card>
+            <Col className="mx-auto" sm={8}>
+              <Card
+                color="dark"
+                className="mx-auto mb-5 text-light rounded border border-warning"
+              >
+                <CardHeader>
+                  <Row className="expense-table-card-header">
+                    <Col xs="6">
+                      <div className="expense-table-heading">Expenses</div>
+                    </Col>
+                    <Col xs="6">
+                      <Badge
+                        color={this.totalExpenseBadgeColor(this.state.expenses)}
+                        className="p-2 float-right"
+                        pill
+                      >
+                        This Month's Expenses:
+                        <span>
+                          ${" "}
+                          {this.GU.prettyNumber(
+                            this.calculateThisMonthExpenses(this.state.expenses)
+                          )}
+                        </span>
+                      </Badge>
+                    </Col>
+                  </Row>
+                </CardHeader>
+                {SpinnerIcon(this.state.loading)}
+                <CardBody className="pl-0 pr-0">
+                  {this.state.expenses.length > 0 ? (
+                    <ExpenseTable
+                      color="dark"
+                      state={this.state}
+                      expenses={this.state.expenses}
+                      removeExpense={this.removeExpenseHandler}
+                    />
+                  ) : (
+                    <div className="row">
+                      <span className="mx-auto"> You have no expenses</span>
+                    </div>
+                  )}
+                </CardBody>
+              </Card>
+            </Col>
           </Row>
           <div className="small p-3" id="snackbar">
             Added Expense

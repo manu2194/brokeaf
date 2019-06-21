@@ -47,7 +47,8 @@ export default class Signup extends Component {
         this.props.history.replace("/login");
       })
       .catch(err => {
-        document.getElementById("signup-failed-alert").style.display = "block";
+        document.getElementById("signup-failed-alert").style.visibility =
+          "visible";
         console.log(err);
       });
   };
@@ -60,7 +61,7 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid signup">
         <div className="login-bg" />
         <Row className="p-3">
           <Col sm={4} />
@@ -69,14 +70,16 @@ export default class Signup extends Component {
               <Row>
                 <h2 className="text-warning mx-auto">Signup</h2>
               </Row>
-
-              <Alert
-                id="signup-failed-alert"
-                color="danger"
-                style={{ display: "none" }}
-              >
-                Sign Up Failed
-              </Alert>
+              <Row>
+                <Alert
+                  id="signup-failed-alert"
+                  color="danger"
+                  className="p-1 small w-100 mb-0"
+                  style={{ visibility: "hidden" }}
+                >
+                  Sign Up Failed
+                </Alert>
+              </Row>
               <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                   <Label className="small" for="name-field">

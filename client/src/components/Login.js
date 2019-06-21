@@ -17,14 +17,18 @@ import {
 } from "reactstrap";
 import logo from "../static/brandon.png";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
+import ShakeAnimation from "../utilities/ShakeAnimation";
 
 export default class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    loginFailed: false,
+    loggingIn: false
   };
 
   Auth = new AuthHelperMethods();
+  SA = new ShakeAnimation();
 
   handleInputChange = event => {
     const target = event.target;
@@ -39,23 +43,44 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setButtonText("Logging in");
     this.Auth.login(this.state.email, this.state.password)
       .then(res => {
         if (res === false) {
           return alert("Credentials don't exist");
         }
+        this.setButtonText("Logged in");
         this.props.history.replace("/");
       })
       .catch(err => {
-        document.getElementById("login-failed-alert").style.visibility =
-          "visible";
+        this.displayLoginError();
+        this.setButtonText("Login");
       });
   };
+
+  displayLoginError() {
+    var emailInput = document.getElementById("login-failed-alert");
+    emailInput.style.visibility = "visible";
+    this.SA.shake(emailInput, 1, false);
+    this.setState({ loginFailed: true });
+  }
+  hideLoginError() {
+    document.getElementById("login-failed-alert").style.visibility = "hidden";
+  }
+  setButtonText(text) {
+    var loginButton = document.getElementById("login-button");
+    loginButton.innerText = text;
+  }
 
   componentWillMount() {
     if (this.Auth.loggedIn()) {
       this.props.history.replace("/");
     }
+  }
+
+  componentDidMount() {
+    document.getElementById("email").focus();
+    document.getElementById("password").value = "";
   }
 
   render() {
@@ -91,6 +116,7 @@ export default class Login extends Component {
                     required={true}
                     type="email"
                     placeholder={"Email"}
+                    onFocus={this.handleOnFocus}
                   />
                   <Input
                     className="login-input"
@@ -101,7 +127,12 @@ export default class Login extends Component {
                     placeholder={"Password"}
                   />
                 </FormGroup>
-                <Button className="btn-block" color="warning" type="submit">
+                <Button
+                  id="login-button"
+                  className="btn-block"
+                  color="warning"
+                  type="submit"
+                >
                   Login
                 </Button>
               </Form>
