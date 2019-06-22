@@ -69,7 +69,12 @@ export default class Signup extends Component {
             <Col sm={4}>
               <div className="signup-box mt-5 text-warning">
                 <Row>
-                  <h2 className="text-dark mx-auto">Signup</h2>
+                  <h2
+                    style={{ textShadow: "0 0 9px rgba(0,0,0,0.5)" }}
+                    className="text-light mx-auto"
+                  >
+                    Signup
+                  </h2>
                 </Row>
                 <Row>
                   <Alert
@@ -83,55 +88,55 @@ export default class Signup extends Component {
                 </Row>
                 <Form onSubmit={this.handleSubmit}>
                   <FormGroup row>
-                    <Label className="small text-dark" for="name-field">
+                    <Label className="small text-light" for="name-field">
                       Name
                     </Label>
 
                     <Input
                       type="text"
                       name="name"
-                      className="text-dark signup-input"
+                      className="text-light signup-input"
                       id="name-field"
                       placeholder="Enter your full name"
                       onChange={this.handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup row>
-                    <Label className="small text-dark" for="email-field">
+                    <Label className="small text-light" for="email-field">
                       Email
                     </Label>
 
                     <Input
                       type="email"
                       name="email"
-                      className="text-dark signup-input"
+                      className="text-light signup-input"
                       id="email-field"
                       placeholder="Enter your Email"
                       onChange={this.handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup row>
-                    <Label className="small text-dark" for="password-field">
+                    <Label className="small text-light" for="password-field">
                       Password
                     </Label>
 
                     <Input
                       type="password"
                       name="password"
-                      className="text-dark signup-input"
+                      className="text-light signup-input"
                       id="password-field"
                       placeholder="Enter your Password"
                       onChange={this.handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup row>
-                    <Button className="btn-block mt-3" color="primary">
+                    <Button className="btn-block mt-3 shadow" color="custom">
                       Signup
                     </Button>
                   </FormGroup>
                 </Form>
                 <Row>
-                  <Link className="small text-dark ml-0" to="/login">
+                  <Link className="small text-light ml-0" to="/login">
                     Already have an account? Login here
                   </Link>
                 </Row>

@@ -165,75 +165,79 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <div className="login-bg" />
-        <AppNavbar handleLogout={this._handleLogout} />
+        <div className="App">
+          <AppNavbar handleLogout={this._handleLogout} />
 
-        <div className="container-fluid">
-          {/* <Row>
+          <div className="container-fluid">
+            {/* <Row>
             <h3 id="greeting" className="text-light mt-4 mx-auto">
               {getGreeting()},
               <span className="font-weight-bold"> {this.state.user}</span>
             </h3>
           </Row> */}
-          <Row className="mt-5">
-            <Col sm={5} className="mb-4">
-              <Card className="shadow-sm card-custom">
-                <CardHeader>
-                  <span className="font-weight-bold">Enter your expenses</span>
-                </CardHeader>
-                <CardBody>
-                  <Expense
-                    state={this.state}
-                    submitExpense={this.handleSubmitExpense}
-                  />
-                </CardBody>
-              </Card>
-            </Col>
-
-            <Col sm={7} className="mb-4">
-              <Card className="shadow-sm card-custom">
-                <CardHeader className="shadow">
-                  <Badge
-                    color={this.totalExpenseBadgeColor(this.state.expenses)}
-                    className="p-2 shadow-sm"
-                    pill
-                  >
-                    {this.GU.monthString(new Date().getMonth())}'s Expenses:{" "}
-                    <span>
-                      $
-                      {this.GU.prettyNumber(
-                        this.calculateThisMonthExpenses(this.state.expenses)
-                      )}
+            <Row className="mt-5">
+              <Col sm={5} className="mb-4">
+                <Card className="shadow-sm card-custom">
+                  <CardHeader>
+                    <span className="font-weight-bold">
+                      Enter your expenses
                     </span>
-                  </Badge>
-                </CardHeader>
-                {/* {SpinnerIcon(this.state.loading)} */}
-                <CardBody
-                  style={{ height: "500px" }}
-                  className="p-0 m-0 pre-scrollable"
-                >
-                  {this.state.expenses.length > 0 ? (
-                    <ExpenseTable
+                  </CardHeader>
+                  <CardBody>
+                    <Expense
                       state={this.state}
-                      expenses={this.state.expenses}
-                      removeExpense={this.removeExpenseHandler}
+                      submitExpense={this.handleSubmitExpense}
                     />
-                  ) : (
-                    <div className="mx-auto w-50 text-center mt-5">
-                      {" "}
-                      You have no expenses
-                    </div>
-                  )}
-                </CardBody>
-              </Card>
-            </Col>
-            <div className="small p-3" id="snackbar">
-              Added Expense
-            </div>
-          </Row>
+                  </CardBody>
+                </Card>
+              </Col>
+
+              <Col sm={7} className="mb-4">
+                <Card className="shadow-sm card-custom">
+                  <CardHeader className="shadow">
+                    <Badge
+                      color={this.totalExpenseBadgeColor(this.state.expenses)}
+                      className="p-2 shadow-sm"
+                      pill
+                    >
+                      {this.GU.monthString(new Date().getMonth())}'s Expenses:{" "}
+                      <span>
+                        $
+                        {this.GU.prettyNumber(
+                          this.calculateThisMonthExpenses(this.state.expenses)
+                        )}
+                      </span>
+                    </Badge>
+                  </CardHeader>
+                  {/* {SpinnerIcon(this.state.loading)} */}
+                  <CardBody
+                    style={{ height: "500px" }}
+                    className="p-0 m-0 pre-scrollable"
+                  >
+                    {this.state.expenses.length > 0 ? (
+                      <ExpenseTable
+                        state={this.state}
+                        expenses={this.state.expenses}
+                        removeExpense={this.removeExpenseHandler}
+                      />
+                    ) : (
+                      <div className="mx-auto w-50 text-center mt-5">
+                        {" "}
+                        You have no expenses
+                      </div>
+                    )}
+                  </CardBody>
+                </Card>
+              </Col>
+              <div className="small p-3" id="snackbar">
+                Added Expense
+              </div>
+            </Row>
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

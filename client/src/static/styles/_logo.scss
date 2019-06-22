@@ -7,6 +7,7 @@ $redcolor: rgba(216, 30, 91, 1);
 .logo-dark {
   color: $darkcolor;
   font-family: $logoFont;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.212);
 }
 .logo-dark span,
 .logo-light span {

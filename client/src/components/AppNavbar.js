@@ -28,7 +28,7 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar
-          className="shadow-lg sticky-top"
+          className="shadow-sm sticky-top"
           color="custom"
           dark
           expand="md"
@@ -50,6 +50,11 @@ class AppNavbar extends Component {
                   GitHub
                 </NavLink>
               </NavItem> */}
+              <NavItem>
+                <NavLink style={{ cursor: "pointer" }} disabled>
+                  Help
+                </NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink
                   style={{ cursor: "pointer" }}

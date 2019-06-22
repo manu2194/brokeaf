@@ -51,17 +51,17 @@
 
 .btn-custom {
   color: black;
-  background-color: #ba75a9;
+  background-color: #d90368;
 }
 
 .btn-custom:hover {
-  background-color: #d90368;
+  background-color: rgba(217, 3, 104, 0.7);
   color: black;
 }
 
 .btn-custom:focus {
-  -webkit-box-shadow: 0 0 0 4px rgba(217, 3, 104, 0.4);
-          box-shadow: 0 0 0 4px rgba(217, 3, 104, 0.4);
+  -webkit-box-shadow: 0 0 0 4px rgba(217, 3, 104, 0.3);
+          box-shadow: 0 0 0 4px rgba(217, 3, 104, 0.3);
 }
 
 /* Scrollbar */
@@ -119,7 +119,7 @@
 /*my variables*/
 /*logo colors*/
 nav.bg-custom {
-  background-color: #2e294e;
+  background: rgba(0, 0, 0, 0.185);
 }
 
 /*imported color palette*/
@@ -128,6 +128,7 @@ nav.bg-custom {
 .logo-dark {
   color: #2b2b2b;
   font-family: "Righteous", cursive;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.212);
 }
 
 .logo-dark span,
@@ -143,32 +144,31 @@ nav.bg-custom {
 /*Variables*/
 /*Mixins*/
 body {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: grey;
+  background-image: linear-gradient(67.3deg, #245279 39.2%, #3b85c5 95.6%);
+  background-size: cover;
   font-family: "Poppins", sans-serif;
-  background: #22c1c3;
-  background: linear-gradient(135deg, #22c1c3 0%, #fdbb2d 100%);
 }
 
 .login-bg {
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: #ba75a9;
-  background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%) no-repeat center center fixed;
+  background-color: grey;
+  background-image: linear-gradient(67.3deg, #245279 39.2%, #3b85c5 95.6%);
   background-size: cover;
 }
 
-/* @media only screen and (max-width: 600px) {
-  .login-bg {
-    background: rgb(31, 30, 14);
-  }
-} */
 .expense-table-hr {
   border-top: 1px solid #bebebe;
 }
 
 .expense-input,
 .expense-input:focus {
-  font-family: "Cairo", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .button-glow {

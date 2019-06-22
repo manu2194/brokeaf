@@ -128,15 +128,15 @@ export default class Login extends Component {
                   </FormGroup>
                   <Button
                     id="login-button"
-                    className="btn-block"
-                    color="primary"
+                    className="btn-block shadow"
+                    color="custom"
                     type="submit"
                   >
                     Login
                   </Button>
                 </Form>
                 <div className="mt-4">
-                  <Link to="/signup" className="text-dark small">
+                  <Link to="/signup" className="text-light small">
                     <span className="">
                       Don't have an account yet? Signup here
                     </span>

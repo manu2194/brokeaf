@@ -114,7 +114,11 @@ class Expense extends Component {
                   onKeyUp={this.addToValidExpenses}
                 />
 
-                <Button id="add-expense" color="custom btn-block" type="submit">
+                <Button
+                  id="add-expense"
+                  color="custom btn-block shadow"
+                  type="submit"
+                >
                   <span>Add</span>
                 </Button>
 
