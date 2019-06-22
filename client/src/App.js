@@ -166,18 +166,18 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="login-bg" />
         <div className="App">
+          <div className="login-bg" />
           <AppNavbar handleLogout={this._handleLogout} />
 
           <div className="container-fluid">
-            {/* <Row>
-            <h3 id="greeting" className="text-light mt-4 mx-auto">
-              {getGreeting()},
-              <span className="font-weight-bold"> {this.state.user}</span>
-            </h3>
-          </Row> */}
-            <Row className="mt-5">
+            <Row>
+              <h3 className="text-light">
+                {getGreeting()},
+                <span className="font-weight-bold"> {this.state.user}</span>
+              </h3>
+            </Row>
+            <Row className="">
               <Col sm={5} className="mb-4">
                 <Card className="shadow-sm card-custom">
                   <CardHeader>

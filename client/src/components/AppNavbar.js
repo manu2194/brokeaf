@@ -28,7 +28,7 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar
-          className="shadow-sm sticky-top"
+          className="sticky-top shadow-sm "
           color="custom"
           dark
           expand="md"

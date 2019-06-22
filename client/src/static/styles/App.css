@@ -52,6 +52,7 @@
 .btn-custom {
   color: black;
   background-color: #d90368;
+  border: 2px solid rgba(0, 0, 0, 0);
 }
 
 .btn-custom:hover {
@@ -60,8 +61,7 @@
 }
 
 .btn-custom:focus {
-  -webkit-box-shadow: 0 0 0 4px rgba(217, 3, 104, 0.3);
-          box-shadow: 0 0 0 4px rgba(217, 3, 104, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.123);
 }
 
 /* Scrollbar */
@@ -76,6 +76,7 @@
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
+  background: rgba(217, 3, 104, 0.09);
 }
 
 /* Handle */
@@ -85,7 +86,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffc1078f;
+  background: rgba(217, 3, 104, 0.8);
   border-radius: 10px;
 }
 
@@ -144,12 +145,6 @@ nav.bg-custom {
 /*Variables*/
 /*Mixins*/
 body {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background-color: grey;
-  background-image: linear-gradient(67.3deg, #245279 39.2%, #3b85c5 95.6%);
-  background-size: cover;
   font-family: "Poppins", sans-serif;
 }
 
