@@ -56,6 +56,8 @@ export default class Signup extends Component {
     console.log(this.Auth.loggedIn());
     if (this.Auth.loggedIn()) {
       this.props.history.push("/");
+    } else {
+      document.getElementById("name-field").focus();
     }
   }
 
@@ -95,7 +97,7 @@ export default class Signup extends Component {
                     <Input
                       type="text"
                       name="name"
-                      className="text-light signup-input"
+                      className="text-dark signup-input input-custom"
                       id="name-field"
                       placeholder="Enter your full name"
                       onChange={this.handleInputChange}
@@ -109,7 +111,7 @@ export default class Signup extends Component {
                     <Input
                       type="email"
                       name="email"
-                      className="text-light signup-input"
+                      className="text-dark signup-input input-custom"
                       id="email-field"
                       placeholder="Enter your Email"
                       onChange={this.handleInputChange}
@@ -123,14 +125,14 @@ export default class Signup extends Component {
                     <Input
                       type="password"
                       name="password"
-                      className="text-light signup-input"
+                      className="text-dark signup-input input-custom"
                       id="password-field"
                       placeholder="Enter your Password"
                       onChange={this.handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup row>
-                    <Button className="btn-block mt-3 shadow" color="custom">
+                    <Button className="btn-block mt-3" color="custom">
                       Signup
                     </Button>
                   </FormGroup>

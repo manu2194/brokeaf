@@ -11,6 +11,7 @@
 @import "./card";
 @import "./navbar";
 @import "./logo";
+@import "./input";
 /*Variables*/
 
 /*Mixins*/
@@ -25,6 +26,7 @@
     rgba(36, 82, 121, 1) 39.2%,
     rgba(59, 133, 197, 1) 95.6%
   );
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -34,7 +36,9 @@
 body {
   font-family: $primaryFont;
 }
-
+.text-shadow {
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.212);
+}
 .login-bg {
   @include background();
 }
@@ -79,10 +83,13 @@ body {
 }
 .expense-list-item {
   background: none;
+  color: $darkColor;
   transition: background-color 0.2s ease;
 }
 .expense-list-item:hover {
-  background-color: rgba($color: $primaryColor, $alpha: 0.2);
+  color: adjust-hue($color: $darkColor, $degrees: 100);
+  background-color: rgba($color: $secondaryColor, $alpha: 0.2);
+  border-color: rgba($color: $darkColor, $alpha: 0.4);
 }
 
 #snackbar {

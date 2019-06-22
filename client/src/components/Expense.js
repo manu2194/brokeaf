@@ -23,6 +23,11 @@ class Expense extends Component {
 
   EPM = new ExpenseParsingMethods();
 
+  componentDidMount() {
+    var inputField = document.getElementById("expense-field");
+    inputField.focus();
+  }
+
   addToValidExpenses = event => {
     var whichKey = event.keyCode || event.which;
     if (whichKey == 188 || whichKey == 8) {
@@ -108,17 +113,13 @@ class Expense extends Component {
                 <Input
                   id="expense-field"
                   placeholder="Enter Expense"
-                  className="expense-input mb-3"
+                  className="expense-input mb-3 input-custom"
                   onChange={this.handleInputChange}
                   required={true}
                   onKeyUp={this.addToValidExpenses}
                 />
 
-                <Button
-                  id="add-expense"
-                  color="custom btn-block shadow"
-                  type="submit"
-                >
+                <Button id="add-expense" color="custom btn-block" type="submit">
                   <span>Add</span>
                 </Button>
 

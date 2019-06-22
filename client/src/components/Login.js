@@ -109,7 +109,7 @@ export default class Login extends Component {
                     <Input
                       autoComplete="nope"
                       name="email"
-                      className="login-input mb-2"
+                      className="login-input mb-2 input-custom"
                       id="email"
                       onChange={this.handleInputChange}
                       required={true}
@@ -118,7 +118,7 @@ export default class Login extends Component {
                       onFocus={this.handleOnFocus}
                     />
                     <Input
-                      className="login-input"
+                      className="login-input input-custom"
                       id="password"
                       type="password"
                       onChange={this.handleInputChange}
@@ -128,7 +128,7 @@ export default class Login extends Component {
                   </FormGroup>
                   <Button
                     id="login-button"
-                    className="btn-block shadow"
+                    className="btn-block"
                     color="custom"
                     type="submit"
                   >

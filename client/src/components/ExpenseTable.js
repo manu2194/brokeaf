@@ -86,14 +86,9 @@ class ExpenseTable extends Component {
           <React.Fragment key={date}>
             <div color="border-0" className="m-2">
               <div className="bg-none pt-2 pb-2 ml-2">
-                <a
-                  style={{ cursor: "pointer", fontSize: "22px" }}
-                  className="text-dark"
-                  id={"toggler-" + index}
-                  size="lg"
-                >
+                <h2 className="text-dark" id={"toggler-" + index} size="lg">
                   {new Date(date).toDateString()}
-                </a>
+                </h2>
               </div>
               {/* <UncontrolledCollapse
                 id={index + "-toggler"}
@@ -108,20 +103,28 @@ class ExpenseTable extends Component {
                     className="expense-list-item flex-column align-items-start"
                   >
                     <div className="d-flex w-100 justify-content-between">
-                      <small style={{ textTransform: "capitalize" }}>
+                      <small
+                        className="p-0 m-0"
+                        style={{
+                          fontSize: "12px",
+                          textTransform: "capitalize"
+                        }}
+                      >
                         {expense.item}
                       </small>
-                      <small>{removeButton(expense, this)}</small>
+
+                      {removeButton(expense, this)}
                     </div>
 
-                    <h3 className="expense-amount mb-1">
+                    <h4 className="expense-amount mb-1">
                       ${GU.prettyNumber(expense.amount)}
-                    </h3>
+                    </h4>
                   </ListGroupItem>
                 ))}
               </ListGroup>
               {/* </UncontrolledCollapse> */}
             </div>
+            <hr style={{ border: "1px dotted rgba(0,0,0,0.2)" }} />
           </React.Fragment>
         ))}
       </div>

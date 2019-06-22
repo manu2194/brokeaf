@@ -171,19 +171,17 @@ class App extends Component {
           <AppNavbar handleLogout={this._handleLogout} />
 
           <div className="container-fluid">
-            <Row>
-              <h3 className="text-light">
-                {getGreeting()},
-                <span className="font-weight-bold"> {this.state.user}</span>
-              </h3>
-            </Row>
-            <Row className="">
+            <Row className="mt-4">
               <Col sm={5} className="mb-4">
                 <Card className="shadow-sm card-custom">
                   <CardHeader>
-                    <span className="font-weight-bold">
-                      Enter your expenses
-                    </span>
+                    <h5 className="text-dark text-shadow">
+                      {this.GU.getGreeting()},
+                      <span className="font-weight-bold">
+                        {" "}
+                        {this.state.user}
+                      </span>
+                    </h5>
                   </CardHeader>
                   <CardBody>
                     <Expense

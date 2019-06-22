@@ -30,6 +30,34 @@ export default class GeneralUtils {
       callback(new Error("Argument is not a number or a string"));
     }
   };
+  snackBar = () => {
+    // Get the snackbar DIV
+    var x = document.getElementById("snackbar");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function() {
+      x.className = x.className.replace("show", "");
+    }, 2000);
+  };
+
+  /**
+   * Returns greeting based on current time.
+   */
+  getGreeting = () => {
+    var today = new Date();
+    var curHr = today.getHours();
+
+    if (curHr < 12) {
+      return "Good Morning";
+    } else if (curHr < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
+    }
+  };
   /**
    * Returns month string from given date number
    * @param {number} number Indexing starts from 0. Therefore, number=0 returns "January"
