@@ -101,35 +101,27 @@ class Expense extends Component {
             </div>
           </Col>
         </Row>
-        <Form className="mt-2" onSubmit={this.handleSubmit}>
+        <Form className="" onSubmit={this.handleSubmit}>
           <Row>
             <Col sm={12}>
               <FormGroup>
-                <InputGroup>
-                  <Input
-                    id="expense-field"
-                    placeholder="Enter Expense"
-                    className="expense-input text-light"
-                    onChange={this.handleInputChange}
-                    required={true}
-                    onKeyUp={this.addToValidExpenses}
-                  />
-                  <InputGroupAddon addonType="append">
-                    <Button
-                      id="add-expense"
-                      style={{ borderLeft: "none" }}
-                      className="button-glow"
-                      color="outline-warning"
-                      type="submit"
-                    >
-                      <span>Add Expense</span>
-                    </Button>
-                  </InputGroupAddon>
-                </InputGroup>
-                <FormText style={{ fontSize: "8px" }}>
+                <Input
+                  id="expense-field"
+                  placeholder="Enter Expense"
+                  className="expense-input mb-3"
+                  onChange={this.handleInputChange}
+                  required={true}
+                  onKeyUp={this.addToValidExpenses}
+                />
+
+                <Button id="add-expense" color="custom btn-block" type="submit">
+                  <span>Add</span>
+                </Button>
+
+                {/* <FormText style={{ fontSize: "8px" }}>
                   Enter your expense in the format:{" "}
                   <span className="font-italic">Amount in Item</span>
-                </FormText>
+                </FormText> */}
               </FormGroup>
             </Col>
             {/* <Col sm={1}>{addingExpenseTooltip()}</Col> */}

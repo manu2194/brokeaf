@@ -1,0 +1,19 @@
+@import "./variables";
+
+$darkcolor: rgb(43, 43, 43);
+$lightcolor: rgb(235, 235, 235);
+$redcolor: rgba(216, 30, 91, 1);
+
+.logo-dark {
+  color: $darkcolor;
+  font-family: $logoFont;
+}
+.logo-dark span,
+.logo-light span {
+  color: $redcolor;
+}
+
+.logo-light {
+  color: $lightcolor;
+  font-family: $logoFont;
+}

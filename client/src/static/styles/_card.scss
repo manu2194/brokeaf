@@ -1,0 +1,21 @@
+@import "./variables";
+
+.card {
+  border: none;
+  &.card-custom {
+    background-color: $primaryColor;
+    border: none;
+
+    .card-header {
+      border: none;
+      background: none;
+    }
+    .card-body {
+      border: none;
+      background: none;
+    }
+    .card-footer {
+      border: none;
+    }
+  }
+}

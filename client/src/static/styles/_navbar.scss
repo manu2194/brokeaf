@@ -1,0 +1,7 @@
+@import "./variables";
+
+nav {
+  &.bg-custom {
+    background-color: $darkColor;
+  }
+}

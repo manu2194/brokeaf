@@ -16,6 +16,7 @@ import {
   Container
 } from "reactstrap";
 import logo from "../static/brandon.png";
+import BrandLogo from "../components/BrandLogo";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
 import ShakeAnimation from "../utilities/ShakeAnimation";
 
@@ -85,69 +86,67 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="container-fluid login">
+      <React.Fragment>
         <div className="login-bg" />
-        <Row>
-          <Col sm={4} />
-          <Col sm={4}>
-            <div className="login-box mt-5 text-warning">
-              <div className="login-logo row mb-2">
-                <h1 id="logo" style={{ fontSize: "50px" }} className="mx-auto">
-                  <img src={logo} alt={"Logo"} />
-                  Broke<span>AF</span>
-                </h1>
-              </div>
-              <Alert
-                id="login-failed-alert"
-                className="p-1 small"
-                color="danger"
-                style={{ visibility: "hidden" }}
-              >
-                Incorrect email or password
-              </Alert>
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup className="mx-auto">
-                  <Input
-                    autoComplete="nope"
-                    name="email"
-                    className="login-input mb-2"
-                    id="email"
-                    onChange={this.handleInputChange}
-                    required={true}
-                    type="email"
-                    placeholder={"Email"}
-                    onFocus={this.handleOnFocus}
-                  />
-                  <Input
-                    className="login-input"
-                    id="password"
-                    type="password"
-                    onChange={this.handleInputChange}
-                    required={true}
-                    placeholder={"Password"}
-                  />
-                </FormGroup>
-                <Button
-                  id="login-button"
-                  className="btn-block"
-                  color="warning"
-                  type="submit"
+        <div className="container-fluid login">
+          <Row>
+            <Col sm={4} />
+            <Col sm={4}>
+              <div className="login-box mt-5 text-warning">
+                <div className="login-logo row mb-1">
+                  <BrandLogo className="mx-auto" size="xl" color="dark" />
+                </div>
+                <Alert
+                  id="login-failed-alert"
+                  className="p-1 small"
+                  color="danger"
+                  style={{ visibility: "hidden" }}
                 >
-                  Login
-                </Button>
-              </Form>
-              <div className="mt-4">
-                <Link to="/signup" className="text-primary small">
-                  <span className="">
-                    Don't have an account yet? Signup here
-                  </span>
-                </Link>
+                  Incorrect email or password
+                </Alert>
+                <Form onSubmit={this.handleSubmit}>
+                  <FormGroup className="mx-auto">
+                    <Input
+                      autoComplete="nope"
+                      name="email"
+                      className="login-input mb-2"
+                      id="email"
+                      onChange={this.handleInputChange}
+                      required={true}
+                      type="email"
+                      placeholder={"Email"}
+                      onFocus={this.handleOnFocus}
+                    />
+                    <Input
+                      className="login-input"
+                      id="password"
+                      type="password"
+                      onChange={this.handleInputChange}
+                      required={true}
+                      placeholder={"Password"}
+                    />
+                  </FormGroup>
+                  <Button
+                    id="login-button"
+                    className="btn-block"
+                    color="primary"
+                    type="submit"
+                  >
+                    Login
+                  </Button>
+                </Form>
+                <div className="mt-4">
+                  <Link to="/signup" className="text-dark small">
+                    <span className="">
+                      Don't have an account yet? Signup here
+                    </span>
+                  </Link>
+                </div>
               </div>
-            </div>
-          </Col>
-          <Col sm={4} />
-        </Row>
-        {/* <Row>
+            </Col>
+            <Col sm={4} />
+          </Row>
+          {/* <Row>
           <div className="col">
             <div className=" w-50 mx-auto">
               <Jumbotron className="text-light" style={{ background: "none" }}>
@@ -161,7 +160,8 @@ export default class Login extends Component {
             </div>
           </div>
         </Row> */}
-      </div>
+        </div>
+      </React.Fragment>
     );
   }
 }

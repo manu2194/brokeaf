@@ -12,7 +12,7 @@ import {
 import AppNavbar from "./components/AppNavbar";
 import Expense from "./components/Expense";
 import ExpenseTable from "./components/ExpenseTable";
-import "./static/App.css";
+import "./static/styles/App.css";
 import "./static/scripts";
 import "./static/brandon.png";
 import { snackBar, getGreeting } from "./static/scripts";
@@ -88,9 +88,9 @@ class App extends Component {
 
   totalExpenseBadgeColor = expenseArray => {
     if (expenseArray.length === 0) {
-      return "danger";
-    } else {
       return "warning";
+    } else {
+      return "dark";
     }
   };
 
@@ -166,6 +166,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="login-bg" />
         <AppNavbar handleLogout={this._handleLogout} />
 
         <div className="container-fluid">
@@ -175,62 +176,62 @@ class App extends Component {
               <span className="font-weight-bold"> {this.state.user}</span>
             </h3>
           </Row> */}
+          <Row className="mt-5">
+            <Col sm={5} className="mb-4">
+              <Card className="shadow-sm card-custom">
+                <CardHeader>
+                  <span className="font-weight-bold">Enter your expenses</span>
+                </CardHeader>
+                <CardBody>
+                  <Expense
+                    state={this.state}
+                    submitExpense={this.handleSubmitExpense}
+                  />
+                </CardBody>
+              </Card>
+            </Col>
 
-          <Row>
-            <div className="mt-5 mb-5 mx-auto" style={{ width: "90%" }}>
-              <Expense
-                state={this.state}
-                submitExpense={this.handleSubmitExpense}
-              />
-            </div>
-          </Row>
-
-          <Row>
-            <Col className="mx-auto" sm={8}>
-              <Card
-                color="dark"
-                className="mx-auto mb-5 text-light rounded border border-warning"
-              >
-                <CardHeader className=" shadow-darker sticky-top">
-                  <Row className="expense-table-card-header">
-                    <Col className="mx-auto">
-                      <Badge
-                        color={this.totalExpenseBadgeColor(this.state.expenses)}
-                        className="p-2"
-                        pill
-                      >
-                        This Month's Expenses:
-                        <span>
-                          ${" "}
-                          {this.GU.prettyNumber(
-                            this.calculateThisMonthExpenses(this.state.expenses)
-                          )}
-                        </span>
-                      </Badge>
-                    </Col>
-                  </Row>
+            <Col sm={7} className="mb-4">
+              <Card className="shadow-sm card-custom">
+                <CardHeader className="shadow">
+                  <Badge
+                    color={this.totalExpenseBadgeColor(this.state.expenses)}
+                    className="p-2 shadow-sm"
+                    pill
+                  >
+                    {this.GU.monthString(new Date().getMonth())}'s Expenses:{" "}
+                    <span>
+                      $
+                      {this.GU.prettyNumber(
+                        this.calculateThisMonthExpenses(this.state.expenses)
+                      )}
+                    </span>
+                  </Badge>
                 </CardHeader>
                 {/* {SpinnerIcon(this.state.loading)} */}
-                <CardBody className="pl-0 pr-0 pt-0 pre-scrollable">
+                <CardBody
+                  style={{ height: "500px" }}
+                  className="p-0 m-0 pre-scrollable"
+                >
                   {this.state.expenses.length > 0 ? (
                     <ExpenseTable
-                      color="dark"
                       state={this.state}
                       expenses={this.state.expenses}
                       removeExpense={this.removeExpenseHandler}
                     />
                   ) : (
-                    <div className="row">
-                      <span className="mx-auto"> You have no expenses</span>
+                    <div className="mx-auto w-50 text-center mt-5">
+                      {" "}
+                      You have no expenses
                     </div>
                   )}
                 </CardBody>
               </Card>
             </Col>
+            <div className="small p-3" id="snackbar">
+              Added Expense
+            </div>
           </Row>
-          <div className="small p-3" id="snackbar">
-            Added Expense
-          </div>
         </div>
       </div>
     );

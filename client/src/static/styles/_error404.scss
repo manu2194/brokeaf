@@ -1,0 +1,24 @@
+#error-404 {
+  position: relative;
+}
+#error-404-background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgb(31, 30, 14);
+  background: url("../../images/error404.jpg");
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#error-404-text {
+  background-color: rgba(0, 0, 0, 0.575);
+  box-shadow: 0 0 16px 16px rgba(0, 0, 0, 0.123);
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import favicon from "../static/favicon.ico";
+import BrandLogo from "../components/BrandLogo";
 import {
   Collapse,
   Navbar,
@@ -26,10 +27,16 @@ class AppNavbar extends Component {
   render() {
     return (
       <div>
-        <Navbar className="shadow-lg" color="dark" dark expand="md">
+        <Navbar
+          className="shadow-lg sticky-top"
+          color="custom"
+          dark
+          expand="md"
+        >
           <NavbarBrand href="/" id="logo" className="navbar-brand text-warning">
-            <img src={favicon} />
-            Broke<span>AF</span>
+            {/* <img src={favicon} />
+            Broke<span>AF</span> */}
+            <BrandLogo size="md" color="light" />
           </NavbarBrand>
 
           <NavbarToggler onClick={this.toggle} />

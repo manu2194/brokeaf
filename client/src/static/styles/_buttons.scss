@@ -1,0 +1,27 @@
+@import "./variables";
+
+.btn-purple {
+  color: white;
+  background-color: rgb(199, 0, 199);
+  &:hover {
+    background-color: rgba(148, 0, 148, 0.548);
+    color: white;
+  }
+  &:focus {
+    box-shadow: 0 0 0 4px rgba(182, 0, 182, 0.432);
+  }
+}
+
+.btn-custom {
+  $textColor: black;
+  $mainColor: $secondaryColor;
+  color: $textColor;
+  background-color: $backgroundColor;
+  &:hover {
+    background-color: $mainColor;
+    color: $textColor;
+  }
+  &:focus {
+    box-shadow: 0 0 0 4px rgba($color: $mainColor, $alpha: 0.4);
+  }
+}

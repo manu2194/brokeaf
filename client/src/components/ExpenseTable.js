@@ -77,20 +77,6 @@ class ExpenseTable extends Component {
     this.props.removeExpense(id);
   };
 
-  displayRemoveButton = event => {
-    var target = event.target;
-    var id = target.id.split("-")[2];
-    var removeButton = document.getElementById(`delete-expense-${id}`);
-    if (removeButton) removeButton.style.visibility = "visible";
-  };
-  hideRemoveButtom = event => {
-    var target = event.target;
-    var id = target.id.split("-")[2];
-    console.log("HIDE", id);
-    var removeButton = document.getElementById(`delete-expense-${id}`);
-    if (removeButton) removeButton.style.visibility = "hidden";
-  };
-
   render() {
     const GU = new GeneralUtils();
     const { expenses } = this.state;
@@ -98,11 +84,11 @@ class ExpenseTable extends Component {
       <div id="expense-table">
         {Object.keys(this.state.groupedExpenses).map((date, index) => (
           <React.Fragment key={date}>
-            <Card color="dark border-0" className="m-2">
+            <div color="border-0" className="m-2">
               <div className="bg-none pt-2 pb-2 ml-2">
                 <a
                   style={{ cursor: "pointer", fontSize: "22px" }}
-                  className="text-warning"
+                  className="text-dark"
                   id={"toggler-" + index}
                   size="lg"
                 >
@@ -119,27 +105,23 @@ class ExpenseTable extends Component {
                   <ListGroupItem
                     key={expense._id}
                     id={"expense-item-" + expense._id}
-                    className="expense-list-item bg-none flex-column align-items-start"
+                    className="expense-list-item flex-column align-items-start"
                   >
                     <div className="d-flex w-100 justify-content-between">
-                      <h6
-                        style={{ textTransform: "capitalize" }}
-                        className="expense-name font-weight-bold"
-                      >
+                      <small style={{ textTransform: "capitalize" }}>
                         {expense.item}
-                      </h6>
+                      </small>
                       <small>{removeButton(expense, this)}</small>
                     </div>
 
-                    <p className="expense-amount mb-1">
+                    <h3 className="expense-amount mb-1">
                       ${GU.prettyNumber(expense.amount)}
-                    </p>
+                    </h3>
                   </ListGroupItem>
                 ))}
               </ListGroup>
               {/* </UncontrolledCollapse> */}
-            </Card>
-            <hr />
+            </div>
           </React.Fragment>
         ))}
       </div>
