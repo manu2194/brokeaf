@@ -12,6 +12,7 @@ import {
   Col,
   Row
 } from "reactstrap";
+import ShakeAnimation from "../utilities/ShakeAnimation";
 import logo from "../static/brandon.png";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
 import axios from "axios";
@@ -25,6 +26,7 @@ export default class Signup extends Component {
   };
 
   Auth = new AuthHelperMethods();
+  SA = new ShakeAnimation();
 
   handleInputChange = event => {
     //console.log(event.target.name);
@@ -32,7 +34,12 @@ export default class Signup extends Component {
       [event.target.name]: event.target.value
     });
   };
-
+  displaySignupError() {
+    var emailInput = document.getElementById("signup-failed-alert");
+    emailInput.style.visibility = "visible";
+    this.SA.shake(emailInput, 1, false);
+    this.setState({ loginFailed: true });
+  }
   handleSubmit = event => {
     event.preventDefault();
     const user = {
@@ -47,8 +54,7 @@ export default class Signup extends Component {
         this.props.history.replace("/login");
       })
       .catch(err => {
-        document.getElementById("signup-failed-alert").style.visibility =
-          "visible";
+        this.displaySignupError();
         console.log(err);
       });
   };
@@ -85,7 +91,7 @@ export default class Signup extends Component {
                     className="p-1 small w-100 mb-0"
                     style={{ visibility: "hidden" }}
                   >
-                    Sign Up Failed
+                    Oops! The email you entered is already in use.
                   </Alert>
                 </Row>
                 <Form onSubmit={this.handleSubmit}>

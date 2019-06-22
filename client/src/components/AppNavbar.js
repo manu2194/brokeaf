@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import favicon from "../static/favicon.ico";
 import BrandLogo from "../components/BrandLogo";
+import HamburgerMenu from "../components/HamburgerMenu";
 import {
   Collapse,
   Navbar,
@@ -15,6 +16,8 @@ class AppNavbar extends Component {
   state = { isOpen: false };
 
   toggle = () => {
+    var hamburgerElement = document.getElementById("navbar-hamburger");
+    hamburgerElement.classList.toggle("change");
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -39,7 +42,8 @@ class AppNavbar extends Component {
             <BrandLogo size="md" color="light" />
           </NavbarBrand>
 
-          <NavbarToggler onClick={this.toggle} />
+          {/* <NavbarToggler onClick={this.toggle} /> */}
+          <HamburgerMenu onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               {/* <NavItem>
