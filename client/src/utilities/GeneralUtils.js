@@ -12,14 +12,12 @@ export default class GeneralUtils {
    * @example prettyNumber('45000') = '45,000'.
    * @example prettyNumber(900000) = '900,000'.
    */
-  prettyNumber = (number, callback) => {
+  prettyNumber = number => {
     if (typeof number === "string") {
       number = number.replace(/,/g, "");
       var floatString = parseFloat(number);
       if (isNaN(floatString)) {
-        callback(
-          new Error("Argument is a string but contains non-number values")
-        );
+        return "NaN";
       }
       return floatString.toLocaleString(undefined, {
         minimumFractionDigits: 2
@@ -27,7 +25,7 @@ export default class GeneralUtils {
     } else if (typeof number === "number") {
       return number.toLocaleString(undefined, { minimumFractionDigits: 2 });
     } else {
-      callback(new Error("Argument is not a number or a string"));
+      throw new Error("Argument is not a number or a string");
     }
   };
   snackBar = () => {

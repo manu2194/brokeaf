@@ -19,6 +19,7 @@ import classnames from "classnames";
 import "../static/scripts";
 import ExpenseParsingMethods from "../utilities/ExpenseParsingMethods";
 import GeneralUtils from "../utilities/GeneralUtils";
+import ShakeAnimation from "../utilities/ShakeAnimation";
 const uuid = require("uuid");
 
 function greeting(greeting, user) {
@@ -26,6 +27,37 @@ function greeting(greeting, user) {
     <h5 className="text-dark text-shadow">
       {greeting},<span className="font-weight-bold"> {user}</span>
     </h5>
+  );
+}
+
+function errorBadge(component) {
+  return (
+    <Col sm={6} className="mb-0">
+      <div
+        id="expense-error"
+        style={{ visibility: "hidden" }}
+        className="badge bg-danger mt-1 ml-1 shadow-sm"
+      >
+        <small className="text-light mr-2">
+          There are errors in one or more of your expenses!
+        </small>
+        <Button
+          style={{
+            outline: "none",
+            border: "none",
+            boxShadow: "none"
+          }}
+          type="button"
+          size="sm"
+          color="none"
+          onClick={() => {
+            component.displayError(false);
+          }}
+        >
+          &times;
+        </Button>
+      </div>
+    </Col>
   );
 }
 /**
@@ -46,6 +78,7 @@ class Expense extends Component {
   };
   GU = new GeneralUtils();
   EPM = new ExpenseParsingMethods();
+  SA = new ShakeAnimation();
 
   componentDidMount() {
     if (this.props.focusOnLoad) {
@@ -103,14 +136,31 @@ class Expense extends Component {
     return { item: item, amount: amount };
   };
 
-  displayError = () => {
-    document.getElementById("expense-error").style.visibility = "visible";
+  displayError = (tof = true) => {
+    var errorElement = document.getElementById("expense-error");
+    if (errorElement) {
+      if (tof) {
+        errorElement.style.visibility = "visible";
+        this.SA.shake(errorElement, 1, false);
+      } else {
+        errorElement.style.visibility = "hidden";
+      }
+    }
+  };
+  validateManualExpenses = expenseObject => {
+    const { item, amount } = expenseObject;
+    if (item === "" || amount === "") {
+      return false;
+    } else if (isNaN(parseFloat(amount))) {
+      return false;
+    } else {
+      return true;
+    }
   };
   handleManualSubmit = event => {
     event.preventDefault();
-
-    if (this.state.item !== "" && this.state.amount !== "") {
-      var expense = { item: this.state.item, amount: this.state.amount };
+    var expense = { item: this.state.item, amount: this.state.amount };
+    if (this.validateManualExpenses(expense)) {
       this.props.submitExpense([expense]);
     } else {
       this.displayError();
@@ -177,23 +227,12 @@ class Expense extends Component {
             </NavLink>
           </NavItem>
         </Nav>
+
         <Card className={"card-border-custom " + this.props.className}>
+          {errorBadge(this)}
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <CardBody>
-                <Row>
-                  <Col sm={4}>
-                    <div
-                      id="expense-error"
-                      style={{ visibility: "hidden" }}
-                      className="badge bg-danger pill"
-                    >
-                      <small className="text-light">
-                        There are errors in one or more of your expenses!
-                      </small>
-                    </div>
-                  </Col>
-                </Row>
                 <Form className="" onSubmit={this.handleSubmit}>
                   <Row>
                     <Col sm={12}>
@@ -205,6 +244,7 @@ class Expense extends Component {
                           onChange={this.handleInputChange}
                           required={true}
                           onKeyUp={this.addToValidExpenses}
+                          onFocus={this.displayError(false)}
                         />
 
                         <Button
@@ -228,19 +268,6 @@ class Expense extends Component {
             </TabPane>
             <TabPane tabId="2">
               <CardBody>
-                <Row>
-                  <Col sm={4}>
-                    <div
-                      id="expense-error"
-                      style={{ visibility: "hidden" }}
-                      className="badge bg-danger pill"
-                    >
-                      <small className="text-light">
-                        There are errors in one or more of your expenses!
-                      </small>
-                    </div>
-                  </Col>
-                </Row>
                 <Form className="" onSubmit={this.handleManualSubmit}>
                   <Row>
                     <Col sm={12}>
@@ -251,6 +278,7 @@ class Expense extends Component {
                           className="expense-input mb-3 input-custom"
                           onChange={this.handleManualInputChange}
                           required={true}
+                          onFocus={this.displayError(false)}
                         />
                         <Input
                           id="expense-field-manual-amount"
@@ -258,6 +286,7 @@ class Expense extends Component {
                           className="expense-input mb-3 input-custom"
                           onChange={this.handleManualInputChange}
                           required={true}
+                          onFocus={this.displayError(false)}
                         />
 
                         <Button

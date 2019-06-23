@@ -94,7 +94,7 @@ export default class Login extends Component {
             <Col sm={4}>
               <div className="login-box mt-5 text-warning">
                 <div className="login-logo row mb-1">
-                  <BrandLogo className="mx-auto" size="xl" color="dark" />
+                  <BrandLogo className="mx-auto" size="xl" color="light" />
                 </div>
                 <Alert
                   id="login-failed-alert"

@@ -23,15 +23,9 @@
   height: 100%;
   position: fixed;
   background-color: grey;
-  $bg1: lighten(
-    $color: $darkColor,
-    $amount: 15
-  );
-  $bg2: darken(
-    $color: $bg1,
-    $amount: 5
-  );
-  background-image: linear-gradient(67.3deg, $bg1 39.2%, $bg2 95.6%);
+  $bg1: lighten(desaturate($color1, 20%), 10);
+  $bg2: desaturate($color1, 10%);
+  background-image: linear-gradient(45deg, $bg1 39.2%, $bg2 95.6%);
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
