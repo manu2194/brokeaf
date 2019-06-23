@@ -13,6 +13,8 @@
 @import "./logo";
 @import "./input";
 @import "./hamburger";
+@import "./tabs";
+
 /*Variables*/
 
 /*Mixins*/
@@ -21,12 +23,15 @@
   height: 100%;
   position: fixed;
   background-color: grey;
-
-  background-image: linear-gradient(
-    67.3deg,
-    rgba(36, 82, 121, 1) 39.2%,
-    rgba(59, 133, 197, 1) 95.6%
+  $bg1: lighten(
+    $color: $darkColor,
+    $amount: 15
   );
+  $bg2: darken(
+    $color: $bg1,
+    $amount: 5
+  );
+  background-image: linear-gradient(67.3deg, $bg1 39.2%, $bg2 95.6%);
 
   -webkit-background-size: cover;
   -moz-background-size: cover;

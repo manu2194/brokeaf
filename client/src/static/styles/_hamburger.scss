@@ -1,5 +1,7 @@
 @import "./variables";
 
+$mainColor: $hamburgerColor;
+
 .hamburger {
   border: none;
   cursor: pointer;
@@ -10,7 +12,7 @@
   }
   &:hover {
     div {
-      background-color: darken($color: $color5, $amount: 0);
+      background-color: darken($color: $mainColor, $amount: 0);
     }
   }
 }
@@ -20,7 +22,7 @@
 .bar3 {
   width: 35px;
   height: 5px;
-  background-color: darken($color: $color5, $amount: 10);
+  background-color: darken($color: $mainColor, $amount: 10);
   margin: 6px 0;
   transition: 0.4s;
 }

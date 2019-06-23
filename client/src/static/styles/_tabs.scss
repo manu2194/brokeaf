@@ -1,0 +1,61 @@
+@import "./variables";
+
+$mainColor: $primaryColor;
+
+@mixin tabBorder($side) {
+  border: none;
+  @if $side == "left" {
+    border: none;
+    border-right: none;
+    border-top: 1px solid rgba($color: $secondaryColor, $alpha: 0);
+    border-left: 1px solid rgba($color: $secondaryColor, $alpha: 0);
+    border-radius: 12px 0px 0px 0px;
+  } @else if $side == "right" {
+    border-left: none;
+    border-top: 1px solid rgba($color: $secondaryColor, $alpha: 0);
+    border-right: 1px solid rgba($color: $secondaryColor, $alpha: 0);
+    border-radius: 0px 12px 0px 0px;
+  }
+}
+.nav {
+  &.nav-tabs {
+    &.nav-tabs-custom {
+      border: none;
+      .nav-item {
+        background-color: darken($color: $mainColor, $amount: 10);
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+        .nav-link {
+          color: grey;
+          &.active {
+            color: rgb(63, 63, 63);
+            background-color: $mainColor;
+            font-weight: bold;
+          }
+        }
+        &#tab-1 {
+          @include tabBorder("left");
+          .nav-link {
+            border: none;
+            border-radius: 12px 0px 0px 0px;
+          }
+          //   &:hover {
+          //     border-color: rgba($color: $secondaryColor, $alpha: 0.3);
+          //   }
+        }
+        &#tab-2 {
+          @include tabBorder("right");
+          .nav-link {
+            border: none;
+            border-radius: 0px 12px 0px 0px;
+          }
+          //   &:hover {
+          //     border-color: rgba($color: $secondaryColor, $alpha: 0.3);
+          //   }
+        }
+      }
+    }
+  }
+}

@@ -147,22 +147,6 @@ class App extends Component {
       });
   };
 
-  testPost = () => {
-    const test = { msg: "hello fuckers" };
-    axios
-      .post("/api/auth/user", test, {
-        headers: {
-          "x-auth-token": this.Auth.getToken()
-        }
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log("ERROR", err);
-      });
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -173,61 +157,23 @@ class App extends Component {
           <div className="container-fluid">
             <Row className="mt-4">
               <Col sm={5} className="mb-4">
-                <Card className="shadow-sm card-custom">
-                  <CardHeader>
-                    <h5 className="text-dark text-shadow">
-                      {this.GU.getGreeting()},
-                      <span className="font-weight-bold">
-                        {" "}
-                        {this.state.user}
-                      </span>
-                    </h5>
-                  </CardHeader>
-                  <CardBody>
-                    <Expense
-                      state={this.state}
-                      submitExpense={this.handleSubmitExpense}
-                    />
-                  </CardBody>
-                </Card>
+                <Expense
+                  user={this.state.user}
+                  className="shadow-sm card-custom"
+                  state={this.state}
+                  submitExpense={this.handleSubmitExpense}
+                  focusOnLoad={true}
+                />
               </Col>
 
               <Col sm={7} className="mb-4">
-                <Card className="shadow-sm card-custom">
-                  <CardHeader className="shadow">
-                    <Badge
-                      color={this.totalExpenseBadgeColor(this.state.expenses)}
-                      className="p-2 shadow-sm"
-                      pill
-                    >
-                      {this.GU.monthString(new Date().getMonth())}'s Expenses:{" "}
-                      <span>
-                        $
-                        {this.GU.prettyNumber(
-                          this.calculateThisMonthExpenses(this.state.expenses)
-                        )}
-                      </span>
-                    </Badge>
-                  </CardHeader>
-                  {/* {SpinnerIcon(this.state.loading)} */}
-                  <CardBody
-                    style={{ height: "500px" }}
-                    className="p-0 m-0 pre-scrollable"
-                  >
-                    {this.state.expenses.length > 0 ? (
-                      <ExpenseTable
-                        state={this.state}
-                        expenses={this.state.expenses}
-                        removeExpense={this.removeExpenseHandler}
-                      />
-                    ) : (
-                      <div className="mx-auto w-50 text-center mt-5">
-                        {" "}
-                        You have no expenses
-                      </div>
-                    )}
-                  </CardBody>
-                </Card>
+                <ExpenseTable
+                  className="shadow-sm card-custom"
+                  state={this.state}
+                  expenses={this.state.expenses}
+                  removeExpense={this.removeExpenseHandler}
+                  height="500px"
+                />
               </Col>
               <div className="small p-3" id="snackbar">
                 Added Expense

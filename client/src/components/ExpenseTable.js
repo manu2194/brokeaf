@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import {
   Button,
   Card,
+  CardHeader,
+  CardBody,
   UncontrolledCollapse,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Badge
 } from "reactstrap";
 import ExpenseSortingMethods from "../utilities/ExpenseSortingMethods";
 import GeneralUtils from "../utilities/GeneralUtils";
@@ -46,6 +49,7 @@ class ExpenseTable extends Component {
     expenses: [],
     groupedExpenses: []
   };
+  GU = new GeneralUtils();
 
   sortExpenses(expenses) {
     const ESM = new ExpenseSortingMethods();
@@ -81,55 +85,90 @@ class ExpenseTable extends Component {
     const GU = new GeneralUtils();
     const { expenses } = this.state;
     return (
-      <div id="expense-table">
-        {Object.keys(this.state.groupedExpenses).map((date, index) => (
-          <React.Fragment key={date}>
-            <div color="border-0" className="m-2">
-              <div className="bg-none pt-2 pb-2 ml-2">
-                <h2 className="text-dark" id={"toggler-" + index} size="lg">
-                  {new Date(date).toDateString()}
-                </h2>
-              </div>
-              {/* <UncontrolledCollapse
-                id={index + "-toggler"}
-                toggler={"#toggler-" + index}
-                clas
-              > */}
-              <ListGroup className="mb-2 ml-4" flush>
-                {this.state.groupedExpenses[date].map(expense => (
-                  <ListGroupItem
-                    key={expense._id}
-                    id={"expense-item-" + expense._id}
-                    className="expense-list-item flex-column align-items-start"
-                  >
-                    <div className="d-flex w-100 justify-content-between">
-                      <small
-                        className="p-0 m-0"
-                        style={{
-                          fontSize: "12px",
-                          textTransform: "capitalize"
-                        }}
+      <Card className={this.props.className}>
+        <CardHeader className="shadow">
+          <Badge
+            color={this.totalExpenseBadgeColor(this.props.expenses)}
+            className="p-2 shadow-sm"
+            pill
+          >
+            {this.GU.monthString(new Date().getMonth())}'s Expenses:{" "}
+            <span>
+              $
+              {this.GU.prettyNumber(
+                this.calculateThisMonthExpenses(this.props.expenses)
+              )}
+            </span>
+          </Badge>
+        </CardHeader>
+        <CardBody
+          style={{ height: this.props.height }}
+          className="p-0 m-0 pre-scrollable"
+        >
+          <div id="expense-table">
+            {Object.keys(this.state.groupedExpenses).map((date, index) => (
+              <React.Fragment key={date}>
+                <div color="border-0" className="m-2">
+                  <div className="bg-none pt-2 pb-2 ml-2">
+                    <h2 className="text-dark" id={"toggler-" + index} size="lg">
+                      {new Date(date).toDateString()}
+                    </h2>
+                  </div>
+                  <ListGroup className="mb-2 ml-4" flush>
+                    {this.state.groupedExpenses[date].map(expense => (
+                      <ListGroupItem
+                        key={expense._id}
+                        id={"expense-item-" + expense._id}
+                        className="expense-list-item flex-column align-items-start"
                       >
-                        {expense.item}
-                      </small>
+                        <div className="d-flex w-100 justify-content-between">
+                          <small
+                            className="p-0 m-0"
+                            style={{
+                              fontSize: "12px",
+                              textTransform: "capitalize"
+                            }}
+                          >
+                            {expense.item}
+                          </small>
 
-                      {removeButton(expense, this)}
-                    </div>
+                          {removeButton(expense, this)}
+                        </div>
 
-                    <h4 className="expense-amount mb-1">
-                      ${GU.prettyNumber(expense.amount)}
-                    </h4>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-              {/* </UncontrolledCollapse> */}
-            </div>
-            <hr style={{ border: "1px dotted rgba(0,0,0,0.2)" }} />
-          </React.Fragment>
-        ))}
-      </div>
+                        <h4 className="expense-amount mb-1">
+                          ${GU.prettyNumber(expense.amount)}
+                        </h4>
+                      </ListGroupItem>
+                    ))}
+                  </ListGroup>
+                  {/* </UncontrolledCollapse> */}
+                </div>
+                <hr style={{ border: "1px dotted rgba(0,0,0,0.2)" }} />
+              </React.Fragment>
+            ))}
+          </div>
+        </CardBody>
+      </Card>
     );
   }
+  totalExpenseBadgeColor = expenseArray => {
+    if (expenseArray.length === 0) {
+      return "warning";
+    } else {
+      return "dark";
+    }
+  };
+  calculateThisMonthExpenses = expenseArray => {
+    var currentMonth = new Date(Date.now()).getMonth();
+    var thisMonthExpenes = expenseArray.filter(
+      expense => new Date(expense.date).getMonth() == currentMonth
+    );
+    var sum = 0;
+    thisMonthExpenes.map(element => {
+      sum = sum + parseFloat(element.amount);
+    });
+    return sum;
+  };
 }
 export default ExpenseTable;
 

@@ -91,10 +91,6 @@
 /*imported color palette*/
 /*my variables*/
 /*logo colors*/
-.card {
-  border: none;
-}
-
 .card.card-custom {
   background-color: #eadeda;
   border: none;
@@ -114,11 +110,16 @@
   border: none;
 }
 
+.card.card-border-custom {
+  border-radius: 0;
+  border-radius: 0px 5px 5px 5px;
+}
+
 /*imported color palette*/
 /*my variables*/
 /*logo colors*/
 nav.bg-custom {
-  background: rgba(0, 0, 0, 0.185);
+  background: rgba(0, 0, 0, 0);
 }
 
 /*imported color palette*/
@@ -175,7 +176,7 @@ nav.bg-custom {
 }
 
 .hamburger:hover div {
-  background-color: #ffd400;
+  background-color: #d90368;
 }
 
 .bar1,
@@ -183,7 +184,7 @@ nav.bg-custom {
 .bar3 {
   width: 35px;
   height: 5px;
-  background-color: #ccaa00;
+  background-color: #a70250;
   margin: 6px 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -203,6 +204,57 @@ nav.bg-custom {
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
+/*imported color palette*/
+/*my variables*/
+/*logo colors*/
+.nav.nav-tabs.nav-tabs-custom {
+  border: none;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item {
+  background-color: #d8c1b9;
+  cursor: pointer;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item .nav-link {
+  color: grey;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item .nav-link.active {
+  color: #3f3f3f;
+  background-color: #eadeda;
+  font-weight: bold;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item#tab-1 {
+  border: none;
+  border: none;
+  border-right: none;
+  border-top: 1px solid rgba(217, 3, 104, 0);
+  border-left: 1px solid rgba(217, 3, 104, 0);
+  border-radius: 12px 0px 0px 0px;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item#tab-1 .nav-link {
+  border: none;
+  border-radius: 12px 0px 0px 0px;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item#tab-2 {
+  border: none;
+  border-left: none;
+  border-top: 1px solid rgba(217, 3, 104, 0);
+  border-right: 1px solid rgba(217, 3, 104, 0);
+  border-radius: 0px 12px 0px 0px;
+}
+
+.nav.nav-tabs.nav-tabs-custom .nav-item#tab-2 .nav-link {
+  border: none;
+  border-radius: 0px 12px 0px 0px;
+}
+
 /*Variables*/
 /*Mixins*/
 body {
@@ -218,7 +270,7 @@ body {
   height: 100%;
   position: fixed;
   background-color: grey;
-  background-image: linear-gradient(67.3deg, #245279 39.2%, #3b85c5 95.6%);
+  background-image: linear-gradient(67.3deg, #4c4380 39.2%, #423b6f 95.6%);
   background-size: cover;
 }
 

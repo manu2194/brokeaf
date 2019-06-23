@@ -1,7 +1,6 @@
 @import "./variables";
 
 .card {
-  border: none;
   &.card-custom {
     background-color: $primaryColor;
     border: none;
@@ -17,5 +16,10 @@
     .card-footer {
       border: none;
     }
+  }
+
+  &.card-border-custom {
+    border-radius: 0;
+    border-radius: 0px 5px 5px 5px;
   }
 }

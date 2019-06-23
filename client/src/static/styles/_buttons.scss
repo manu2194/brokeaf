@@ -2,7 +2,7 @@
 
 .btn-custom {
   $textColor: black;
-  $mainColor: $secondaryColor;
+  $mainColor: $buttonColor;
   color: $textColor;
   background-color: $mainColor;
   border: none;
