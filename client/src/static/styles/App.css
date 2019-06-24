@@ -54,13 +54,13 @@
 }
 
 .btn-custom:focus {
-  -webkit-box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2), 1px 4px 10px 1px rgba(0, 0, 0, 0) inset;
-          box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2), 1px 4px 10px 1px rgba(0, 0, 0, 0) inset;
+  -webkit-box-shadow: 2px 2px 10px 2px rgba(110, 0, 0, 0.2), 1px 4px 10px 1px rgba(0, 0, 0, 0) inset;
+          box-shadow: 2px 2px 10px 2px rgba(110, 0, 0, 0.2), 1px 4px 10px 1px rgba(0, 0, 0, 0) inset;
 }
 
 .btn-custom:focus:active {
-  -webkit-box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2), 1px 4px 10px 1px rgba(0, 0, 0, 0.2) inset;
-          box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2), 1px 4px 10px 1px rgba(0, 0, 0, 0.2) inset;
+  -webkit-box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2), 1px 3px 5px 5px rgba(0, 0, 0, 0.2) inset;
+          box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2), 1px 3px 5px 5px rgba(0, 0, 0, 0.2) inset;
 }
 
 /* Scrollbar */
@@ -93,7 +93,6 @@
 /*my variables*/
 /*logo colors*/
 .card.card-custom {
-  border-radius: 20px 5px 5px 20px;
   background-color: #eadeda;
   border: none;
 }
@@ -112,9 +111,14 @@
   border: none;
 }
 
-.card.card-border-custom {
+.card.card-border-expense-custom {
   border-radius: 0;
   border-radius: 0px 20px 20px 20px;
+}
+
+.card.card-border-expense-table-custom {
+  border-radius: 0;
+  border-radius: 20px 5px 5px 20px;
 }
 
 /*imported color palette*/
@@ -162,6 +166,28 @@ nav.bg-custom {
   border: 1px solid rgba(217, 3, 104, 0.6);
   -webkit-box-shadow: 0 0 0px 3px rgba(217, 3, 104, 0.2);
           box-shadow: 0 0 0px 3px rgba(217, 3, 104, 0.2);
+}
+
+.input-login {
+  border: 1px solid rgba(255, 212, 0, 0.2);
+  outline: none;
+  border-radius: 50px;
+  -webkit-box-shadow: 0 0 0 0 rgba(255, 212, 0, 0);
+          box-shadow: 0 0 0 0 rgba(255, 212, 0, 0);
+  -webkit-transition: border 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+  transition: border 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+  transition: border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  transition: border 0.1s ease-in-out, box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+}
+
+.input-login:focus, .input-login:active {
+  border: 1px solid rgba(255, 212, 0, 0.3);
+  -webkit-box-shadow: 0 0 10px 1px rgba(255, 212, 0, 0.3);
+          box-shadow: 0 0 10px 1px rgba(255, 212, 0, 0.3);
+}
+
+.input-login:hover {
+  border: 1px solid rgba(255, 212, 0, 0.5);
 }
 
 /*imported color palette*/
@@ -256,6 +282,13 @@ nav.bg-custom {
 .nav.nav-tabs.nav-tabs-custom .nav-item#tab-2 .nav-link {
   border: none;
   border-radius: 0px 12px 0px 0px;
+}
+
+/*imported color palette*/
+/*my variables*/
+/*logo colors*/
+.text-custom {
+  color: #d90368;
 }
 
 /*Variables*/

@@ -103,7 +103,7 @@ export default class Signup extends Component {
                     <Input
                       type="text"
                       name="name"
-                      className="text-dark signup-input input-custom"
+                      className="text-dark signup-input input-login"
                       id="name-field"
                       placeholder="Enter your full name"
                       onChange={this.handleInputChange}
@@ -117,7 +117,7 @@ export default class Signup extends Component {
                     <Input
                       type="email"
                       name="email"
-                      className="text-dark signup-input input-custom"
+                      className="text-dark signup-input input-login"
                       id="email-field"
                       placeholder="Enter your Email"
                       onChange={this.handleInputChange}
@@ -131,7 +131,7 @@ export default class Signup extends Component {
                     <Input
                       type="password"
                       name="password"
-                      className="text-dark signup-input input-custom"
+                      className="text-dark signup-input input-login"
                       id="password-field"
                       placeholder="Enter your Password"
                       onChange={this.handleInputChange}

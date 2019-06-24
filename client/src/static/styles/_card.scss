@@ -2,7 +2,6 @@
 
 .card {
   &.card-custom {
-    border-radius: 20px 5px 5px 20px;
     background-color: $primaryColor;
     border: none;
 
@@ -19,8 +18,12 @@
     }
   }
 
-  &.card-border-custom {
+  &.card-border-expense-custom {
     border-radius: 0;
     border-radius: 0px 20px 20px 20px;
+  }
+  &.card-border-expense-table-custom {
+    border-radius: 0;
+    border-radius: 20px 5px 5px 20px;
   }
 }

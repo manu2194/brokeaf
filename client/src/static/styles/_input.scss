@@ -1,17 +1,36 @@
 @import "./variables";
 
 .input-custom {
-  border: 1px solid rgba($color: $secondaryColor, $alpha: 0.2);
+  $mainColor: $secondaryColor;
+  border: 1px solid rgba($color: $mainColor, $alpha: 0.2);
   outline: none;
   border-radius: 50px;
-  box-shadow: 0 0 0 0 rgba($color: $secondaryColor, $alpha: 0);
+  box-shadow: 0 0 0 0 rgba($color: $mainColor, $alpha: 0);
   transition: border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
   &:focus,
   &:active {
-    border: 1px solid rgba($color: $secondaryColor, $alpha: 0.6);
-    box-shadow: 0 0 0px 3px rgba($color: $secondaryColor, $alpha: 0.2);
+    border: 1px solid rgba($color: $mainColor, $alpha: 0.6);
+    box-shadow: 0 0 0px 3px rgba($color: $mainColor, $alpha: 0.2);
   }
 
   &:hover {
+  }
+}
+
+.input-login {
+  $mainColor: $color5;
+  border: 1px solid rgba($color: $mainColor, $alpha: 0.2);
+  outline: none;
+  border-radius: 50px;
+  box-shadow: 0 0 0 0 rgba($color: $mainColor, $alpha: 0);
+  transition: border 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  &:focus,
+  &:active {
+    border: 1px solid rgba($color: $mainColor, $alpha: 0.3);
+    box-shadow: 0 0 10px 1px rgba($color: $mainColor, $alpha: 0.3);
+  }
+
+  &:hover {
+    border: 1px solid rgba($color: $mainColor, $alpha: 0.5);
   }
 }

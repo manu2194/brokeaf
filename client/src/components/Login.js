@@ -109,7 +109,7 @@ export default class Login extends Component {
                     <Input
                       autoComplete="nope"
                       name="email"
-                      className="login-input mb-2 input-custom"
+                      className="login-input mb-2 input-login"
                       id="email"
                       onChange={this.handleInputChange}
                       required={true}
@@ -118,7 +118,7 @@ export default class Login extends Component {
                       onFocus={this.handleOnFocus}
                     />
                     <Input
-                      className="login-input input-custom"
+                      className="login-input input-login"
                       id="password"
                       type="password"
                       onChange={this.handleInputChange}

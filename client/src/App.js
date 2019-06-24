@@ -159,7 +159,7 @@ class App extends Component {
               <Col sm={5} className="mb-4">
                 <Expense
                   user={this.state.user}
-                  className="shadow-sm card-custom"
+                  className="shadow-sm card-custom card-border-expense-custom"
                   state={this.state}
                   submitExpense={this.handleSubmitExpense}
                   focusOnLoad={true}
@@ -168,7 +168,7 @@ class App extends Component {
 
               <Col sm={7} className="mb-4">
                 <ExpenseTable
-                  className="shadow-sm card-custom"
+                  className="shadow-sm card-custom card-border-expense-table-custom"
                   state={this.state}
                   expenses={this.state.expenses}
                   removeExpense={this.removeExpenseHandler}

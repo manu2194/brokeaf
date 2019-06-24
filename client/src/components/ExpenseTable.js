@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardBody,
   UncontrolledCollapse,
+  Collapse,
   ListGroup,
   ListGroupItem,
   Badge
@@ -31,29 +32,45 @@ function removeButton(expense, object) {
     </Button>
   );
 }
-function dateFormat(date) {
-  return new Date(date).toLocaleString();
-}
-
-function dateSort(expenses) {
-  console.log(expenses);
-  expenses.sort(function(a, b) {
-    return a.date > b.date;
-  });
-  console.log(expenses);
-  return expenses;
-}
 
 class ExpenseTable extends Component {
   state = {
     expenses: [],
-    groupedExpenses: []
+    groupedExpenses: [],
+    collapse: []
   };
   GU = new GeneralUtils();
-
+  /**
+   *Initializes the Collapse array in the Component state with the first element as true, and rest false
+   * @param {number} length
+   */
+  initializeTogglerArray(length) {
+    let collapse = new Array(length).fill(false);
+    if (collapse.length > 0) {
+      collapse[0] = true;
+      this.setState({ collapse });
+    }
+  }
+  /**
+   * Toggles the collapse array in the Component State at that index which is equal to the id of the target of the event
+   * @param {event} event
+   */
+  toggle = event => {
+    event.preventDefault();
+    var index = parseInt(event.target.id);
+    let collapse = [...this.state.collapse];
+    collapse[index] = !this.state.collapse[index];
+    this.setState({ collapse });
+  };
+  /**
+   *Groups expenses by their dates. Returns object with keys as dates, and values as arrays with expenses.
+   * @param {array} expenses
+   * @returns {object}
+   */
   sortExpenses(expenses) {
     const ESM = new ExpenseSortingMethods();
     var groupedExpenses = ESM.groupByDate(expenses);
+
     return groupedExpenses;
   }
 
@@ -64,8 +81,12 @@ class ExpenseTable extends Component {
       var dateB = new Date(b.date);
       return dateB - dateA;
     });
+    var groupedExpenses = this.sortExpenses(propsExpenses);
     this.setState({ expenses: propsExpenses });
-    this.setState({ groupedExpenses: this.sortExpenses(propsExpenses) });
+    this.setState({ groupedExpenses });
+
+    var len = Object.keys(groupedExpenses).length;
+    this.initializeTogglerArray(len);
   }
 
   componentDidUpdate(prevProps) {
@@ -73,7 +94,10 @@ class ExpenseTable extends Component {
       this.componentDidMount();
     }
   }
-
+  /**
+   * Handler method to call the parent Component's removeExpense function to ultimately remove the component with the given id
+   * @param {number} id
+   */
   removeExpenseHandler = id => {
     this.setState({
       expenses: this.state.expenses.filter(expense => expense._id != id)
@@ -110,38 +134,46 @@ class ExpenseTable extends Component {
               <React.Fragment key={date}>
                 <div color="border-0" className="m-2">
                   <div className="bg-none pt-2 pb-2 ml-2">
-                    <h2 className="text-dark" id={"toggler-" + index} size="lg">
+                    <h3
+                      id={index}
+                      className="text-custom"
+                      size="lg"
+                      style={{ cursor: "pointer" }}
+                      onClick={this.toggle}
+                    >
                       {new Date(date).toDateString()}
-                    </h2>
+                    </h3>
                   </div>
-                  <ListGroup className="mb-2 ml-4" flush>
-                    {this.state.groupedExpenses[date].map(expense => (
-                      <ListGroupItem
-                        key={expense._id}
-                        id={"expense-item-" + expense._id}
-                        className="expense-list-item flex-column align-items-start"
-                      >
-                        <div className="d-flex w-100 justify-content-between">
-                          <small
-                            className="p-0 m-0"
-                            style={{
-                              fontSize: "12px",
-                              textTransform: "capitalize"
-                            }}
-                          >
-                            {expense.item}
-                          </small>
 
-                          {removeButton(expense, this)}
-                        </div>
+                  <Collapse isOpen={this.state.collapse[index]}>
+                    <ListGroup className="mb-2 ml-4" flush>
+                      {this.state.groupedExpenses[date].map(expense => (
+                        <ListGroupItem
+                          key={expense._id}
+                          id={"expense-item-" + expense._id}
+                          className="expense-list-item flex-column align-items-start"
+                        >
+                          <div className="d-flex w-100 justify-content-between">
+                            <small
+                              className="p-0 m-0"
+                              style={{
+                                fontSize: "12px",
+                                textTransform: "capitalize"
+                              }}
+                            >
+                              {expense.item}
+                            </small>
 
-                        <h4 className="expense-amount mb-1">
-                          ${GU.prettyNumber(expense.amount)}
-                        </h4>
-                      </ListGroupItem>
-                    ))}
-                  </ListGroup>
-                  {/* </UncontrolledCollapse> */}
+                            {removeButton(expense, this)}
+                          </div>
+
+                          <h4 className="expense-amount mb-1">
+                            ${GU.prettyNumber(expense.amount)}
+                          </h4>
+                        </ListGroupItem>
+                      ))}
+                    </ListGroup>
+                  </Collapse>
                 </div>
                 <hr style={{ border: "1px dotted rgba(0,0,0,0.2)" }} />
               </React.Fragment>
@@ -151,6 +183,10 @@ class ExpenseTable extends Component {
       </Card>
     );
   }
+  /**
+   * Method to change the background color of the badge displaying the current month's expenses.
+   * @param {array} expenseArray
+   */
   totalExpenseBadgeColor = expenseArray => {
     if (expenseArray.length === 0) {
       return "warning";
@@ -158,6 +194,10 @@ class ExpenseTable extends Component {
       return "dark";
     }
   };
+  /**
+   * Calculates and returns the total expenses made in the current month
+   * @param {array} expenseArray An array with expenses, with each element being an object that has the date property
+   */
   calculateThisMonthExpenses = expenseArray => {
     var currentMonth = new Date(Date.now()).getMonth();
     var thisMonthExpenes = expenseArray.filter(
@@ -171,32 +211,3 @@ class ExpenseTable extends Component {
   };
 }
 export default ExpenseTable;
-
-// class ExpenseTable2 extends Component {
-//   render() {
-//     const { expenses } = this.props.state;
-
-//     return (
-//       <Table size="sm" id="expense-table" dark responsive hover>
-//         <thead className="border-0 shadow-lg bg-warning text-dark">
-//           <tr>
-//             <th style={{ width: "4%" }}> </th>
-//             <th style={{ width: "32%" }}>Expense</th>
-//             <th style={{ width: "32%" }}>Amount</th>
-//             <th style={{ width: "32%" }}>Date</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {expenses.map(expense => (
-//             <tr key={expense._id}>
-//               <th scope="row">{removeButton(expense, this)}</th>
-//               <td>{expense.item}</td>
-//               <td>$ {expense.amount}</td>
-//               <td>{dateFormat(expense.date)}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </Table>
-//     );
-//   }
-// }
