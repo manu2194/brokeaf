@@ -1,7 +1,7 @@
 @import "./variables";
 
 .btn-custom {
-  $textColor: black;
+  $textColor: white;
   $mainColor: $buttonColor;
   color: $textColor;
   background-color: $mainColor;
@@ -13,10 +13,14 @@
   transition: background 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 
   &:hover {
-    background-color: darken($color: $mainColor, $amount: 5);
+    color: $textColor;
+    box-shadow: 2px 6px 15px 4px rgba(0, 0, 0, 0.3),
+      0px 0px 5px 5px rgba(0, 0, 0, 0) inset;
+    background-color: darken($color: $mainColor, $amount: 2);
   }
 
   &:focus {
+    color: $textColor;
     box-shadow: 2px 2px 10px 2px rgba(110, 0, 0, 0.2),
       1px 4px 10px 1px rgba(0, 0, 0, 0) inset;
     &:active {

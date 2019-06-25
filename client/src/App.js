@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Spinner,
-  Card,
-  CardBody,
-  CardHeader,
-  Row,
-  Col,
-  Badge,
-  Button
-} from "reactstrap";
+import { Spinner, Row, Col } from "reactstrap";
 import AppNavbar from "./components/AppNavbar";
 import Expense from "./components/Expense";
 import ExpenseTable from "./components/ExpenseTable";
@@ -38,11 +29,13 @@ function SpinnerIcon(loadingFlag) {
 class App extends Component {
   state = {
     user: "",
+    uid: "",
     expenses: [],
     loading: false
   };
   Auth = new AuthHelperMethods();
   GU = new GeneralUtils();
+
   _handleLogout = () => {
     this.Auth.logout();
     this.props.history.replace("/login");
@@ -69,30 +62,11 @@ class App extends Component {
           };
         });
         this.setState({ user: res.data.name });
+        this.setState({ uid: res.data._id });
         this.setState({ loading: false });
         this.setState({ expenses });
       });
   }
-
-  calculateThisMonthExpenses = expenseArray => {
-    var currentMonth = new Date(Date.now()).getMonth();
-    var thisMonthExpenes = expenseArray.filter(
-      expense => new Date(expense.date).getMonth() == currentMonth
-    );
-    var sum = 0;
-    thisMonthExpenes.map(element => {
-      sum = sum + parseFloat(element.amount);
-    });
-    return sum;
-  };
-
-  totalExpenseBadgeColor = expenseArray => {
-    if (expenseArray.length === 0) {
-      return "warning";
-    } else {
-      return "dark";
-    }
-  };
 
   handleSubmitExpense = expenseObject => {
     //POST to Backend Epi, each expense Object
@@ -101,25 +75,28 @@ class App extends Component {
         "x-auth-token": this.Auth.getToken()
       }
     };
-    expenseObject.forEach(expense => {
-      this.setState({ loading: true });
-      //console.log(expense);
+    if (!this.Auth.isTokenExpired()) {
+      expenseObject.forEach(expense => {
+        this.setState({ loading: true });
+        //console.log(expense);
 
-      //need to post the token with the expense object.
-      axios
-        .post("/api/auth/user", expense, config)
-        .then(res => {
-          //console.log(res);
-          snackBar();
-          document.getElementById("expense-field").value = "";
-        })
-        .catch(err => {
-          console.log("Error adding item\n" + err);
-        })
-        .finally(() => {
-          this.componentDidMount();
-        });
-    });
+        //need to post the token with the expense object.
+        axios
+          .post("/api/auth/user", expense, config)
+          .then(res => {
+            //console.log(res);
+            snackBar();
+            document.getElementById("expense-field").value = "";
+          })
+          .catch(err => {
+            console.log("Unknown Error occured! Logging out...");
+            this._handleLogout();
+          })
+          .finally(() => {
+            this.componentDidMount();
+          });
+      });
+    }
   };
   /**
    * Handler that sends a HTTP DELETE request to the server to remove the expense with the given ID from the database
@@ -147,12 +124,20 @@ class App extends Component {
       });
   };
 
+  isAdmin = () => {
+    if (this.state.uid === "5d0726a64ba3f90017e3ee05") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
         <div className="App">
           <div className="login-bg" />
-          <AppNavbar handleLogout={this._handleLogout} />
+          <AppNavbar handleLogout={this._handleLogout} admin={this.isAdmin()} />
 
           <div className="container-fluid">
             <Row className="mt-4">

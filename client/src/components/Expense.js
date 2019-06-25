@@ -20,15 +20,6 @@ import "../static/scripts";
 import ExpenseParsingMethods from "../utilities/ExpenseParsingMethods";
 import GeneralUtils from "../utilities/GeneralUtils";
 import ShakeAnimation from "../utilities/ShakeAnimation";
-const uuid = require("uuid");
-
-function greeting(greeting, user) {
-  return (
-    <h5 className="text-dark text-shadow">
-      {greeting},<span className="font-weight-bold"> {user}</span>
-    </h5>
-  );
-}
 
 function errorBadge(component) {
   return (
@@ -38,9 +29,7 @@ function errorBadge(component) {
         style={{ visibility: "hidden" }}
         className="badge bg-danger mt-1 ml-1 shadow-sm"
       >
-        <small className="text-light mr-2">
-          There are errors in one or more of your expenses!
-        </small>
+        <small className="text-light mr-2">Not a valid expense format.</small>
         <Button
           style={{
             outline: "none",
@@ -89,7 +78,7 @@ class Expense extends Component {
 
   addToValidExpenses = event => {
     var whichKey = event.keyCode || event.which;
-    if (whichKey == 188 || whichKey == 8) {
+    if (whichKey === 188 || whichKey === 8) {
       var validExpenses = this.getAllExpenses(this.state.expense.toString());
       if (this.state.validExpenses !== validExpenses) {
         this.setState({ validExpenses });
@@ -128,12 +117,15 @@ class Expense extends Component {
    * @param {string} expenseFieldValue
    * @returns {Object}
    */
-  parseExpense = expenseFieldValue => {
-    var { item, amount } = this.EPM.extractExpenseInformation(
-      expenseFieldValue
-    );
-
-    return { item: item, amount: amount };
+  extractItemAndAmount = expenseFieldValue => {
+    var object = this.EPM.extractExpenseInformation(expenseFieldValue);
+    if (object) {
+      return object;
+    } else {
+      console.log("Extraction Failed");
+      this.displayError();
+      return false;
+    }
   };
 
   displayError = (tof = true) => {
@@ -147,7 +139,7 @@ class Expense extends Component {
       }
     }
   };
-  validateManualExpenses = expenseObject => {
+  validateExpenses = expenseObject => {
     const { item, amount } = expenseObject;
     if (item === "" || amount === "") {
       return false;
@@ -159,11 +151,15 @@ class Expense extends Component {
   };
   handleManualSubmit = event => {
     event.preventDefault();
-    var expense = { item: this.state.item, amount: this.state.amount };
-    if (this.validateManualExpenses(expense)) {
-      this.props.submitExpense([expense]);
-    } else {
-      this.displayError();
+    var expense = `${this.state.item} for ${this.state.amount}`;
+    var object = this.extractItemAndAmount(expense);
+    if (object) {
+      if (this.validateExpenses(object)) {
+        this.props.submitExpense([object]);
+      } else {
+        this.displayError();
+        console.log(object);
+      }
     }
   };
   /**
@@ -179,7 +175,17 @@ class Expense extends Component {
     var allExpensesObjectList = [];
     if (allExpenses) {
       allExpenses.forEach(expense => {
-        allExpensesObjectList.push(this.parseExpense(expense));
+        var expenseObject = this.extractItemAndAmount(expense);
+        if (expenseObject) {
+          if (this.validateExpenses(expenseObject)) {
+            //console.log("Valid Expense", expenseObject);
+            allExpensesObjectList.push(expenseObject);
+          } else {
+            console.log("Invalid Expense: ", expense);
+          }
+        } else {
+          console.log("Expense Object returned", expenseObject);
+        }
       });
 
       this.props.submitExpense(allExpensesObjectList);

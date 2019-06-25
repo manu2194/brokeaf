@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import lostimage from "../images/error404.jpg";
+
 import { Link } from "react-router-dom";
-import logo from "../static/brandon.png";
+
 import BrandLogo from "../components/BrandLogo";
 
 export default class Error404 extends Component {

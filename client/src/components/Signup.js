@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import {
-  Card,
-  CardBody,
-  CardHeader,
   Input,
   Button,
   Form,
@@ -13,7 +10,7 @@ import {
   Row
 } from "reactstrap";
 import ShakeAnimation from "../utilities/ShakeAnimation";
-import logo from "../static/brandon.png";
+
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
 import axios from "axios";
 import { Link } from "react-router-dom";

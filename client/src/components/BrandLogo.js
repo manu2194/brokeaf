@@ -18,6 +18,8 @@ export default class BrandLogo extends Component {
           return "50px";
         case "xl":
           return "60px";
+        default:
+          return "10px";
       }
     } else {
       return "10px";

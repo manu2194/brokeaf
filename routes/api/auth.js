@@ -66,6 +66,13 @@ router.get("/user", auth, (req, res) => {
     });
 });
 
+router.get("/allusers", auth, (req, res) => {
+  console.log("ADMIN GET - ", req.originalUrl);
+  User.find({}).then(users => {
+    res.json(users);
+  });
+});
+
 /**
  * @route POST api/auth/user/
  * @desc POST expenses of particular user

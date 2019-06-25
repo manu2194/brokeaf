@@ -4,7 +4,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  UncontrolledCollapse,
   Collapse,
   ListGroup,
   ListGroupItem,
@@ -37,7 +36,8 @@ class ExpenseTable extends Component {
   state = {
     expenses: [],
     groupedExpenses: [],
-    collapse: []
+    collapse: [],
+    
   };
   GU = new GeneralUtils();
   /**
@@ -100,14 +100,14 @@ class ExpenseTable extends Component {
    */
   removeExpenseHandler = id => {
     this.setState({
-      expenses: this.state.expenses.filter(expense => expense._id != id)
+      expenses: this.state.expenses.filter(expense => expense._id !== id)
     });
     this.props.removeExpense(id);
   };
 
   render() {
     const GU = new GeneralUtils();
-    const { expenses } = this.state;
+
     return (
       <Card className={this.props.className}>
         <CardHeader className="shadow">
@@ -201,7 +201,7 @@ class ExpenseTable extends Component {
   calculateThisMonthExpenses = expenseArray => {
     var currentMonth = new Date(Date.now()).getMonth();
     var thisMonthExpenes = expenseArray.filter(
-      expense => new Date(expense.date).getMonth() == currentMonth
+      expense => new Date(expense.date).getMonth() === currentMonth
     );
     var sum = 0;
     thisMonthExpenes.map(element => {

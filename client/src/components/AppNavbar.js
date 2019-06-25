@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import favicon from "../static/favicon.ico";
 import BrandLogo from "../components/BrandLogo";
 import HamburgerMenu from "../components/HamburgerMenu";
+import { Link } from "react-router-dom";
 import {
   Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Nav,
   NavItem,
   NavLink
@@ -50,14 +45,16 @@ class AppNavbar extends Component {
           <HamburgerMenu onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {/* <NavItem>
-                <NavLink href="#">Options</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/manu2194/brokeaf">
-                  GitHub
-                </NavLink>
-              </NavItem> */}
+              {this.props.admin === true ? (
+                <NavItem>
+                  <NavLink>
+                    <Link to="/admin">Admin</Link>
+                  </NavLink>
+                </NavItem>
+              ) : (
+                <span />
+              )}
+
               <NavItem>
                 <NavLink style={{ cursor: "pointer" }} disabled>
                   Help

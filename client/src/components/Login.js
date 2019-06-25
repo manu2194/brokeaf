@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
-  Card,
-  CardBody,
-  CardHeader,
   Input,
   Button,
   Form,
@@ -11,11 +8,9 @@ import {
   Label,
   Alert,
   Row,
-  Col,
-  Jumbotron,
-  Container
+  Col
 } from "reactstrap";
-import logo from "../static/brandon.png";
+
 import BrandLogo from "../components/BrandLogo";
 import AuthHelperMethods from "../utilities/AuthHelperMethods";
 import ShakeAnimation from "../utilities/ShakeAnimation";

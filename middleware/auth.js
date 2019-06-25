@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const jwtdecode = require("jwt-decode");
 
 /**
  * Middleware function to authorize users based on JSON Web tokens.
@@ -17,6 +18,7 @@ function auth(req, res, next) {
   }
   try {
     //Verify token
+
     const decoded = jwt.verify(token, config.get("jwtSecret"));
     //Add user from payload
     req.user = decoded;
