@@ -22,12 +22,19 @@ function removeButton(expense, object) {
     <Button
       id={`delete-expense-${expense._id}`}
       type="button"
-      className="rounded-circle border-0"
+      className={
+        "border-0 remove-button " +
+        (object.state.confirm === false ? "" : "confirm")
+      }
       color="outline-danger"
-      size="md"
+      size="sm"
       onClick={() => object.removeExpenseHandler(expense._id)}
     >
-      &times;
+      {object.state.confirm === false ? (
+        <span>&times;</span>
+      ) : (
+        <span className="confirm-span">Confirm</span>
+      )}
     </Button>
   );
 }
@@ -37,7 +44,8 @@ class ExpenseTable extends Component {
     expenses: [],
     groupedExpenses: [],
     collapse: [],
-    intialized: false
+    intialized: false,
+    confirm: false
   };
   GU = new GeneralUtils();
   /**
@@ -104,10 +112,20 @@ class ExpenseTable extends Component {
    * @param {number} id
    */
   removeExpenseHandler = id => {
-    this.setState({
-      expenses: this.state.expenses.filter(expense => expense._id !== id)
-    });
-    this.props.removeExpense(id);
+    if (this.state.confirm === false) {
+      this.setState({ confirm: true });
+    } else {
+      this.setState(
+        {
+          expenses: this.state.expenses.filter(expense => expense._id !== id)
+        },
+        () => {
+          this.setState({ confirm: false });
+        }
+      );
+
+      this.props.removeExpense(id);
+    }
   };
 
   render() {
@@ -156,6 +174,9 @@ class ExpenseTable extends Component {
                           key={expense._id}
                           id={"expense-item-" + expense._id}
                           className="rounded-0 expense-list-item flex-column align-items-start"
+                          onMouseLeave={() => {
+                            this.setState({ confirm: false });
+                          }}
                         >
                           <div className="d-flex w-100 justify-content-between">
                             <small

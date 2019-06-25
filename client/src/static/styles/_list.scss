@@ -16,6 +16,22 @@
 
   color: $darkColor;
   transition: all 0.2s ease;
+  .remove-button {
+    opacity: 0;
+    visibility: hidden;
+    width: auto;
+    border-radius: 50%;
+    text-align: center;
+    max-width: 50px;
+    max-height: 29px;
+    overflow: hidden;
+    transition: opacity 0.2s linear, max-width 0.5s linear,
+      border-radius 0.2s ease;
+    &.confirm {
+      overflow: hidden;
+      border-radius: 25px;
+    }
+  }
 }
 .expense-list-item:hover {
   color: lighten(adjust-hue($color: $darkColor, $degrees: 100), 10);
@@ -23,4 +39,13 @@
 
   border-color: rgba($color: $darkColor, $alpha: 0.4);
   transform: translateX(10px);
+  .remove-button {
+    visibility: visible;
+    opacity: 1;
+
+    overflow: hidden;
+    &.confirm {
+      max-width: 100%;
+    }
+  }
 }

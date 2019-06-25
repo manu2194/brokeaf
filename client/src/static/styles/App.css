@@ -367,12 +367,40 @@ nav.bg-custom {
   transition: all 0.2s ease;
 }
 
+.expense-list-item .remove-button {
+  opacity: 0;
+  visibility: hidden;
+  width: auto;
+  border-radius: 50%;
+  text-align: center;
+  max-width: 50px;
+  max-height: 29px;
+  overflow: hidden;
+  -webkit-transition: opacity 0.2s linear, max-width 0.5s linear, border-radius 0.2s ease;
+  transition: opacity 0.2s linear, max-width 0.5s linear, border-radius 0.2s ease;
+}
+
+.expense-list-item .remove-button.confirm {
+  overflow: hidden;
+  border-radius: 25px;
+}
+
 .expense-list-item:hover {
   color: #6f3b45;
   background-color: rgba(151, 69, 108, 0.2);
   border-color: rgba(46, 41, 78, 0.4);
   -webkit-transform: translateX(10px);
           transform: translateX(10px);
+}
+
+.expense-list-item:hover .remove-button {
+  visibility: visible;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.expense-list-item:hover .remove-button.confirm {
+  max-width: 100%;
 }
 
 /*Variables*/
