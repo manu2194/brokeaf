@@ -131,32 +131,31 @@ class ExpenseTable extends Component {
           </Badge>
         </CardHeader>
         <CardBody
-          style={{ height: this.props.height }}
+          style={{ height: this.props.height, overflowX: "hidden" }}
           className="p-0 m-0 pre-scrollable"
         >
           <div id="expense-table">
             {Object.keys(this.state.groupedExpenses).map((date, index) => (
               <React.Fragment key={date}>
                 <div color="border-0" className="m-2">
-                  <div className="bg-none pt-2 pb-2 ml-2">
-                    <h3
+                  <div className="bg-none pt-2 pb-2 ml-2 expense-date-heading">
+                    <h4
                       id={index}
-                      className="text-custom"
+                      className="text-custom "
                       size="lg"
-                      style={{ cursor: "pointer" }}
                       onClick={this.toggle}
                     >
                       {new Date(date).toDateString()}
-                    </h3>
+                    </h4>
                   </div>
 
                   <Collapse isOpen={this.state.collapse[index]}>
-                    <ListGroup className="mb-2 ml-4" flush>
+                    <ListGroup className="mb-2 rounded-0">
                       {this.state.groupedExpenses[date].map(expense => (
                         <ListGroupItem
                           key={expense._id}
                           id={"expense-item-" + expense._id}
-                          className="expense-list-item flex-column align-items-start"
+                          className="rounded-0 expense-list-item flex-column align-items-start"
                         >
                           <div className="d-flex w-100 justify-content-between">
                             <small
@@ -180,7 +179,10 @@ class ExpenseTable extends Component {
                     </ListGroup>
                   </Collapse>
                 </div>
-                <hr style={{ border: "1px dotted rgba(0,0,0,0.2)" }} />
+                <hr
+                  className="w-75"
+                  style={{ border: "1px solid thin rgba(0,0,0,0.2)" }}
+                />
               </React.Fragment>
             ))}
           </div>

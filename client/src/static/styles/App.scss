@@ -16,6 +16,7 @@
 @import "./tabs";
 @import "./text";
 @import "./toast";
+@import "./list";
 
 /*Variables*/
 
@@ -82,16 +83,6 @@ body {
 /*ExpenseTableAPP*/
 #expense-table {
   font-family: $primaryFont;
-}
-.expense-list-item {
-  background: none;
-  color: $darkColor;
-  transition: background-color 0.2s ease;
-}
-.expense-list-item:hover {
-  color: adjust-hue($color: $darkColor, $degrees: 100);
-  background-color: rgba($color: $secondaryColor, $alpha: 0.2);
-  border-color: rgba($color: $darkColor, $alpha: 0.4);
 }
 
 #snackbar {

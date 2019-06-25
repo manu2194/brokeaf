@@ -51,9 +51,7 @@
 
 .btn-custom:hover {
   color: white;
-  -webkit-box-shadow: 2px 6px 15px 4px rgba(0, 0, 0, 0.3), 0px 0px 5px 5px rgba(0, 0, 0, 0) inset;
-          box-shadow: 2px 6px 15px 4px rgba(0, 0, 0, 0.3), 0px 0px 5px 5px rgba(0, 0, 0, 0) inset;
-  background-color: #cf0363;
+  background-color: #b10255;
 }
 
 .btn-custom:focus {
@@ -98,7 +96,6 @@
 /*logo colors*/
 .card.card-custom {
   background-color: #eadeda;
-  border: none;
 }
 
 .card.card-custom .card-header {
@@ -347,6 +344,37 @@ nav.bg-custom {
   transition: transform 200ms ease-in, opacity 150ms ease, -webkit-transform 200ms ease-in;
 }
 
+/*imported color palette*/
+/*my variables*/
+/*logo colors*/
+.expense-date-heading {
+  cursor: pointer;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0);
+  -webkit-transition: text-shadow 0.2s ease;
+  transition: text-shadow 0.2s ease;
+}
+
+.expense-date-heading:hover {
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.expense-list-item {
+  background: none;
+  border: none;
+  border-left: 1px solid rgba(46, 41, 78, 0);
+  color: #2e294e;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.expense-list-item:hover {
+  color: #6f3b45;
+  background-color: rgba(151, 69, 108, 0.2);
+  border-color: rgba(46, 41, 78, 0.4);
+  -webkit-transform: translateX(10px);
+          transform: translateX(10px);
+}
+
 /*Variables*/
 /*Mixins*/
 body {
@@ -425,19 +453,6 @@ body {
 /*ExpenseTableAPP*/
 #expense-table {
   font-family: "Poppins", sans-serif;
-}
-
-.expense-list-item {
-  background: none;
-  color: #2e294e;
-  -webkit-transition: background-color 0.2s ease;
-  transition: background-color 0.2s ease;
-}
-
-.expense-list-item:hover {
-  color: #4e2930;
-  background-color: rgba(217, 3, 104, 0.2);
-  border-color: rgba(46, 41, 78, 0.4);
 }
 
 #snackbar {

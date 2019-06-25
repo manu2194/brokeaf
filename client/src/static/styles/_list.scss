@@ -1,0 +1,26 @@
+@import "./variables";
+
+.expense-date-heading {
+  cursor: pointer;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0);
+  transition: text-shadow 0.2s ease;
+  &:hover {
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+.expense-list-item {
+  background: none;
+  border: none;
+
+  border-left: 1px solid rgba($darkColor, 0);
+
+  color: $darkColor;
+  transition: all 0.2s ease;
+}
+.expense-list-item:hover {
+  color: lighten(adjust-hue($color: $darkColor, $degrees: 100), 10);
+  background-color: desaturate(rgba($color: $secondaryColor, $alpha: 0.2), 60);
+
+  border-color: rgba($color: $darkColor, $alpha: 0.4);
+  transform: translateX(10px);
+}

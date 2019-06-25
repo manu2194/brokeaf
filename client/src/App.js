@@ -190,7 +190,6 @@ class App extends Component {
                   exit: 200
                 }}
                 classNames="success-toast"
-                color={this.state.addOrRemove === 0 ? "success" : "danger"}
                 unmountOnExit
                 onEntered={() => {
                   setTimeout(() => {
@@ -198,15 +197,19 @@ class App extends Component {
                   }, 1000);
                 }}
               >
-                <Alert
-                  color={this.props.color}
-                  className="success-toast shadow-lg"
+                <div
+                  className={
+                    "bg-dark text-light success-toast shadow p-2 border border-" +
+                    (this.state.addOrRemove === 0 ? "success" : "danger")
+                  }
                 >
-                  <strong className="">
+                  <small>
                     {this.state.addOrRemove === 0 ? "Added " : "Removed "}{" "}
-                    {this.state.justAdded.item}
-                  </strong>
-                </Alert>
+                    <span style={{ textTransform: "capitalize" }}>
+                      {this.state.justAdded.item}
+                    </span>
+                  </small>
+                </div>
               </CSSTransition>
             </Row>
           </div>
