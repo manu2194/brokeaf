@@ -295,6 +295,58 @@ nav.bg-custom {
   color: #d90368;
 }
 
+/*imported color palette*/
+/*my variables*/
+/*logo colors*/
+.success-toast {
+  border-radius: 25px;
+  border-width: 2px;
+  min-width: 250px;
+  /* Set a default minimum width */
+  margin-left: -125px;
+  /* Divide value of min-width by 2 */
+  text-align: center;
+  /* Centered text */
+  position: fixed;
+  /* Sit on top of the screen */
+  z-index: 1;
+  /* Add a z-index if needed */
+  left: 50%;
+  /* Center the snackbar */
+  bottom: 30px;
+  /* 30px from the bottom */
+}
+
+.success-toast-enter {
+  opacity: 0.01;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.success-toast-enter-active {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: opacity 300ms ease, -webkit-transform 500ms ease;
+  transition: opacity 300ms ease, -webkit-transform 500ms ease;
+  transition: transform 500ms ease, opacity 300ms ease;
+  transition: transform 500ms ease, opacity 300ms ease, -webkit-transform 500ms ease;
+}
+
+.success-toast-exit {
+  opacity: 1;
+}
+
+.success-toast-exit-active {
+  opacity: 0.01;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: opacity 150ms ease, -webkit-transform 200ms ease-in;
+  transition: opacity 150ms ease, -webkit-transform 200ms ease-in;
+  transition: transform 200ms ease-in, opacity 150ms ease;
+  transition: transform 200ms ease-in, opacity 150ms ease, -webkit-transform 200ms ease-in;
+}
+
 /*Variables*/
 /*Mixins*/
 body {
@@ -311,6 +363,7 @@ body {
   position: fixed;
   background-color: grey;
   background-image: linear-gradient(45deg, #4e4c5e 39.2%, #322f48 95.6%);
+  z-index: -3;
   background-size: cover;
 }
 

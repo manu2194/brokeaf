@@ -37,7 +37,7 @@ class ExpenseTable extends Component {
     expenses: [],
     groupedExpenses: [],
     collapse: [],
-    
+    intialized: false
   };
   GU = new GeneralUtils();
   /**
@@ -49,6 +49,9 @@ class ExpenseTable extends Component {
     if (collapse.length > 0) {
       collapse[0] = true;
       this.setState({ collapse });
+      if (this.state.intialized === false) {
+        this.setState({ intialized: true });
+      }
     }
   }
   /**
@@ -86,7 +89,9 @@ class ExpenseTable extends Component {
     this.setState({ groupedExpenses });
 
     var len = Object.keys(groupedExpenses).length;
-    this.initializeTogglerArray(len);
+    if (this.state.intialized === false) {
+      this.initializeTogglerArray(len);
+    }
   }
 
   componentDidUpdate(prevProps) {

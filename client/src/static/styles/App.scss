@@ -15,6 +15,7 @@
 @import "./hamburger";
 @import "./tabs";
 @import "./text";
+@import "./toast";
 
 /*Variables*/
 
@@ -27,7 +28,7 @@
   $bg1: lighten(desaturate($color1, 20%), 10);
   $bg2: desaturate($color1, 10%);
   background-image: linear-gradient(45deg, $bg1 39.2%, $bg2 95.6%);
-
+  z-index: -3;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

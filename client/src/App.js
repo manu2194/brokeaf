@@ -1,12 +1,21 @@
 import React, { Component } from "react";
-import { Spinner, Row, Col } from "reactstrap";
+import {
+  Spinner,
+  Button,
+  Alert,
+  Row,
+  Col,
+  Toast,
+  ToastBody,
+  ToastHeader
+} from "reactstrap";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import AppNavbar from "./components/AppNavbar";
 import Expense from "./components/Expense";
 import ExpenseTable from "./components/ExpenseTable";
 import "./static/styles/App.css";
 import "./static/scripts";
 import "./static/brandon.png";
-import { snackBar, getGreeting } from "./static/scripts";
 import AuthHelperMethods from "./utilities/AuthHelperMethods";
 import GeneralUtils from "./utilities/GeneralUtils";
 import withAuth from "./components/withAuth";
@@ -31,7 +40,10 @@ class App extends Component {
     user: "",
     uid: "",
     expenses: [],
-    loading: false
+    loading: false,
+    alert: false,
+    justAdded: "",
+    addOrRemove: 0
   };
   Auth = new AuthHelperMethods();
   GU = new GeneralUtils();
@@ -85,7 +97,8 @@ class App extends Component {
           .post("/api/auth/user", expense, config)
           .then(res => {
             //console.log(res);
-            snackBar();
+            this.setState({ justAdded: expense });
+            this.setState({ alert: true, addOrRemove: 0 });
             document.getElementById("expense-field").value = "";
           })
           .catch(err => {
@@ -115,9 +128,18 @@ class App extends Component {
       .delete(`/api/auth/user/${removeId}`, config)
       .then(res => {
         //console.log(res);
+
+        this.state.expenses.forEach(e => {
+          if (e._id === removeId) {
+            this.setState({ justAdded: e });
+          }
+        });
+        this.state.e;
         this.setState(state => ({
           expenses: state.expenses.filter(expense => expense._id !== removeId)
         }));
+
+        this.setState({ alert: true, addOrRemove: 1 });
       })
       .catch(err => {
         console.log("Cannot delete item!\n" + err);
@@ -160,9 +182,32 @@ class App extends Component {
                   height="500px"
                 />
               </Col>
-              <div className="small p-3" id="snackbar">
-                Added Expense
-              </div>
+
+              <CSSTransition
+                in={this.state.alert}
+                timeout={{
+                  enter: 500,
+                  exit: 200
+                }}
+                classNames="success-toast"
+                color={this.state.addOrRemove === 0 ? "success" : "danger"}
+                unmountOnExit
+                onEntered={() => {
+                  setTimeout(() => {
+                    this.setState({ alert: !this.state.alert });
+                  }, 1000);
+                }}
+              >
+                <Alert
+                  color={this.props.color}
+                  className="success-toast shadow-lg"
+                >
+                  <strong className="">
+                    {this.state.addOrRemove === 0 ? "Added " : "Removed "}{" "}
+                    {this.state.justAdded.item}
+                  </strong>
+                </Alert>
+              </CSSTransition>
             </Row>
           </div>
         </div>
